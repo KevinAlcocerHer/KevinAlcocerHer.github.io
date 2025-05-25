@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Obra | TecnoBuild</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="/Login/icon.png">
+    <link rel="stylesheet" href="detalle-style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <header class="obra-header">
+        <button id="btnRegresar" class="btn-regresar">
+            <i class='bx bx-arrow-back'></i> Regresar
+        </button>
+        <button id="btnEditar" class="btn-editar">
+            <i class='bx bx-edit'></i> Editar Obra
+        </button>
+        <button id="btnFinalizar" class="btn-finalizar">
+            <i class='bx bx-check-circle'></i> Finalizar Obra
+        </button>
+        <div class="toggle-mode">
+            <div class="moon-sun">
+                <i class='bx bx-moon icon moon'></i>
+                <i class='bx bx-sun icon sun'></i>
+            </div>
+            <span class="mode-text">Modo oscuro</span>
+            <div class="toggle-switch">
+                <span class="switch"></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="contenedor">
+        <h1 id="obraTitulo" class="obra-titulo">Obra: <span>Nombre de Obra</span></h1>
+        
+        <div class="obra-info-principal">
+            <div class="imagen-obra">
+                <img id="obraImagen" src="/Principal/Obra1.png" alt="Imagen de la obra">
+            </div>
+            <div class="datos-principales">
+                <div class="dato">
+                    <i class='bx bx-map-pin'></i>
+                    <p id="obraUbicacion">Ubicación</p>
+                </div>
+                <div class="dato">
+                    <i class='bx bx-user'></i>
+                    <p id="obraDuenoPredio">Dueño del predio</p>
+                </div>
+                <div class="dato">
+                    <i class='bx bx-dollar-circle'></i>
+                    <p id="obraPresupuesto">Presupuesto:</p>
+                </div>
+                <div class="dato">
+                    <i class='bx bx-calendar'></i>
+                    <p id="obraFechaInicio">Fecha de inicio</p>
+                </div>
+                <div class="dato">
+                    <i class='bx bx-calendar-check'></i>
+                    <p id="obraFechaFin">Fecha de finalización</p>
+                </div>
+                <div class="dato">
+                    <i class='bx bx-file'></i>
+                    <p id="obraNumeroContrato">Número de contrato</p>
+                </div>
+                <div class="progreso-container">
+                    <div class="progreso-info">
+                        <span>Semana</span>
+                        <span id="obraSemana" class="semana-numero">0</span>
+                    </div>
+                    <div class="progreso">
+                        <div id="obraProgreso" class="barra-progreso" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN DE INFORMACIÓN FINANCIERA CORREGIDA -->
+        <div class="proyecto-informacion-container">
+            <h2 class="seccion-titulo">Información del Proyecto</h2>
+            
+            <div class="informacion-proyecto-cuerpo">
+                <div class="proyecto-detalles">
+                    <h3>Estado Financiero</h3>
+                    <div class="estado-financiero">
+                        <div class="detalle-financiero">
+                            <p class="tooltip" data-tooltip="Monto total asignado para este proyecto">
+                                Presupuesto asignado: <span id="financieroPresupuesto">$0</span>
+                            </p>
+                            <p class="tooltip" data-tooltip="Total gastado en materiales y herramientas">
+                                Gasto en materiales: <span id="financieroMateriales">$0</span>
+                            </p>
+                            <p class="tooltip" data-tooltip="Total gastado en salarios y pagos a trabajadores">
+                                Gasto en trabajadores: <span id="financieroTrabajadores">$0</span>
+                            </p>
+                            <p class="tooltip" data-tooltip="Suma de todos los gastos registrados">
+                                Total gastado: <span id="financieroTotalGastado">$0</span>
+                            </p>
+                            <p class="tooltip" data-tooltip="Cantidad disponible del presupuesto original">
+                                Presupuesto restante: <span id="financieroRestante">$0</span>
+                            </p>
+                        </div>
+                        
+                        <div class="grafico-financiero">
+                            <div class="barra-presupuesto">
+                                <div id="barraGastado" class="barra-gastado" style="width: 0%"></div>
+                            </div>
+                            <p>Porcentaje utilizado: <span id="financieroPorcentaje">0%</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="proyecto-acciones">
+                    <button id="btnDescargarPDF" class="btn-descargar-pdf">
+                        <i class='bx bx-download'></i> Descargar Informe PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <!-- Botón para agregar actividad -->
+        <div class="agregar-actividad-container">
+            <button id="btnAgregarActividad" class="btn-agregar-actividad">
+                <i class='bx bx-plus-circle'></i> Agregar Actividad
+            </button>
+        </div>
+
+        <!-- Sección de Actividades -->
+        <div class="actividades-container">
+            
+        </div>
+    </div>
+
+    <!-- Modal para editar la obra -->
+    <div class="modal-editar" id="modalEditar">
+        <div class="modal-content-editar">
+            <h2>Editar Información General</h2>
+            <form id="formEditar">
+                <div class="seccion-form">
+                    <h3>Información General</h3>
+                    <label for="editNombre">Nombre de la obra:</label>
+                    <input type="text" id="editNombre" name="editNombre" required>
+
+                    <label for="editFechaInicio">Fecha de inicio:</label>
+                    <input type="date" id="editFechaInicio" name="editFechaInicio" required>
+
+                    <label for="editUbicacion">Ubicación:</label>
+                    <input type="text" id="editUbicacion" name="editUbicacion" required>
+
+                    <label for="editDuenoPredio">Dueño del predio:</label>
+                    <input type="text" id="editDuenoPredio" name="editDuenoPredio" required>
+
+                    <label for="editPresupuesto">Presupuesto:</label>
+                    <input type="text" id="editPresupuesto" name="editPresupuesto" required>
+
+                    <label for="editFechaFin">Fecha de finalización:</label>
+                    <input type="date" id="editFechaFin" name="editFechaFin" required>
+
+                    <label for="editNumeroContrato">Número de contrato:</label>
+                    <input type="text" id="editNumeroContrato" name="editNumeroContrato" required>
+                    
+                    <!-- Campos ocultos para funcionalidad interna -->
+                    <div style="display: none;">
+                        <label for="editGastoMaterial">Total de gastos de material:</label>
+                        <input type="number" id="editGastoMaterial" name="editGastoMaterial" value="0">
+
+                        <label for="editGastoTrabajadores">Total de gastos en trabajadores:</label>
+                        <input type="number" id="editGastoTrabajadores" name="editGastoTrabajadores" value="0">
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button type="button" class="close" id="cerrarModalEditar">Cancelar</button>
+                    <button type="submit">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para agregar actividad -->
+    <div class="modal-agregar-actividad" id="modalAgregarActividad">
+        <div class="modal-content-agregar">
+            
+            <!-- Selector de tipo de actividad -->
+            <div class="seleccion-tipo-actividad" id="seleccionTipoActividad">
+                <h3>Seleccione el tipo de actividad</h3>
+                <div class="tipos-actividad">
+                    <div class="tipo-actividad" data-tipo="material">
+                        <i class='bx bx-package'></i>
+                        <span>Entrada de Material</span>
+                    </div>
+                    <div class="tipo-actividad" data-tipo="listaRaya">
+                        <i class='bx bx-list-check'></i>
+                        <span>Lista Raya</span>
+                    </div>
+                    <div class="tipo-actividad" data-tipo="herramienta">
+                        <i class='bx bx-wrench'></i>
+                        <span>Entrada Herramienta</span>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button type="button" class="close" id="cerrarSeleccionTipo">Cancelar</button>
+                </div>
+            </div>
+            
+            <!-- Formulario para Entrada de Material -->
+            <div class="formulario-actividad" id="formMaterial" style="display: none;">
+                <h3>Actividad: Entrada de Material</h3>
+                <form id="formAgregarMaterial">
+                    <label for="nuevoFechaEntrada">Fecha:</label>
+                    <input type="date" id="nuevoFechaEntrada" name="nuevoFechaEntrada" required>
+                    
+                    <label for="nuevoCantidad">Cantidad:</label>
+                    <input type="number" id="nuevoCantidad" name="nuevoCantidad" required min="1">
+                    
+                    <label for="nuevoPrecioActual">Precio Actual ($):</label>
+                    <input type="number" id="nuevoPrecioActual" name="nuevoPrecioActual" step="0.01" required min="0">
+                    
+                    <label for="nuevoResponsableRecibe">Responsable Recibe:</label>
+                    <input type="text" id="nuevoResponsableRecibe" name="nuevoResponsableRecibe" required>
+                    
+                    <label for="nuevoTipoMaterial">Tipo de Material:</label>
+                    <input type="text" id="nuevoTipoMaterial" name="nuevoTipoMaterial" required>
+                    
+                    <label for="nuevoResponsableEntrega">Responsable Entrega:</label>
+                    <input type="text" id="nuevoResponsableEntrega" name="nuevoResponsableEntrega" required>
+                    
+                    <label for="nuevoObraMaterial">Obra:</label>
+                    <input type="text" id="nuevoObraMaterial" name="nuevoObraMaterial" required>
+                    
+                    <label for="nuevoSemanaObraMaterial">Semana de obra:</label>
+                    <input type="number" id="nuevoSemanaObraMaterial" name="nuevoSemanaObraMaterial" required min="1">
+                    
+                    <label for="nuevoGastoMaterial" class="campo-calculado">Gasto Total en Material ($):</label>
+                    <input type="number" id="nuevoGastoMaterial" name="nuevoGastoMaterial" class="gasto-input" step="0.01" required placeholder="Se calculará automáticamente" readonly>
+                    
+                    <div class="buttons">
+                        <button type="button" class="close" id="cerrarFormMaterial">Cancelar</button>
+                        <button type="submit">Guardar Actividad</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Formulario para Lista Raya -->
+            <div class="formulario-actividad" id="formListaRaya" style="display: none;">
+                <h3>Actividad: Lista Raya</h3>
+                <form id="formAgregarListaRaya">
+                    <label for="nuevoFechaCorte">Fecha:</label>
+                    <input type="date" id="nuevoFechaCorte" name="nuevoFechaCorte" required>
+                    
+                    <label for="nuevoObraListaRaya">Obra:</label>
+                    <input type="text" id="nuevoObraListaRaya" name="nuevoObraListaRaya" required>
+                    
+                    <label for="nuevoResponsablePagar">Responsable pagar:</label>
+                    <input type="text" id="nuevoResponsablePagar" name="nuevoResponsablePagar" required>
+                    
+                    <label for="nuevoGastoTrabajadores">Gasto Total en Trabajadores ($):</label>
+                    <input type="number" id="nuevoGastoTrabajadores" name="nuevoGastoTrabajadores" class="gasto-input" step="0.01" required placeholder="Ingrese la cantidad total gastada">
+                    
+                    <h4>Empleados</h4>
+                    <div id="nuevoListaTrabajadores" class="lista-trabajadores-detallada">
+                        <!-- Se añadirán dinámicamente -->
+                    </div>
+                    <span class="agregar-item" id="nuevoAgregarTrabajador">+ Agregar empleado</span>
+                    
+                    <div class="buttons">
+                        <button type="button" class="close" id="cerrarFormListaRaya">Cancelar</button>
+                        <button type="submit">Guardar Actividad</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Formulario para Entrada de Herramienta -->
+            <div class="formulario-actividad" id="formHerramienta" style="display: none;">
+                <h3>Actividad: Entrada Herramienta</h3>
+                <form id="formAgregarHerramienta">
+                    <label for="nuevoFechaEntrega">Fecha:</label>
+                    <input type="date" id="nuevoFechaEntrega" name="nuevoFechaEntrega" required>
+                    
+                    <label for="nuevoCantidadHerramientas">Cantidad:</label>
+                    <input type="number" id="nuevoCantidadHerramientas" name="nuevoCantidadHerramientas" required min="1">
+                    
+                    <label for="nuevoResponsableEntrega">Responsable de entrega:</label>
+                    <input type="text" id="nuevoResponsableEntrega" name="nuevoResponsableEntrega" required>
+                    
+                    <label for="nuevoResponsableRecibe">Responsable que recibe:</label>
+                    <input type="text" id="nuevoResponsableRecibe" name="nuevoResponsableRecibe" required>
+                    
+                    <label for="nuevoSemanaObra">Semana de obra:</label>
+                    <input type="number" id="nuevoSemanaObra" name="nuevoSemanaObra" required min="1">
+                    
+                    <label for="nuevoObraSaliente">Obra saliente:</label>
+                    <input type="text" id="nuevoObraSaliente" name="nuevoObraSaliente" required>
+                    
+                    <label for="nuevoObraEntrante">Obra entrante:</label>
+                    <input type="text" id="nuevoObraEntrante" name="nuevoObraEntrante" required>
+                    
+                    <label for="nuevoGastoHerramientas">Gasto en Herramientas ($):</label>
+                    <input type="number" id="nuevoGastoHerramientas" name="nuevoGastoHerramientas" class="gasto-input" step="0.01" required placeholder="Ingrese la cantidad gastada">
+                    
+                    <h4>Herramientas</h4>
+                    <div id="nuevoListaHerramientas" class="lista-editable">
+                        <!-- Se añadirán dinámicamente -->
+                    </div>
+                    <span class="agregar-item" id="nuevoAgregarHerramienta">+ Agregar herramienta</span>
+                    
+                    <div class="buttons">
+                        <button type="button" class="close" id="cerrarFormHerramienta">Cancelar</button>
+                        <button type="submit">Guardar Actividad</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="obra-detalle.js"></script>
+    <script src="agregar-actividad.js"></script>
+    <script src="finalizar-obra.js"></script>
+    <script src="informe-proyecto.js"></script>
+</body>
+</html>

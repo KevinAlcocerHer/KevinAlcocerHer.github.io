@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecno Build: Herramienta</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="/Login/icon.png">
+    <style>
+    *{
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+        html {
+            font-size: 14px;
+        }
+
+        section {
+            padding: 15px;
+        }
+        
+        .tabla {
+            left: 108px !important;
+            width: calc(100% - 108px) !important;
+        }
+        
+        table {
+            width: 95% !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        html {
+            font-size: 12px;
+        }
+
+        section {
+            padding: 10px;
+        }
+    }
+
+    :root{
+        --body-color: #fff; 
+        --sidebar-color: #D6CBBE; 
+        --primary-color: #D4A373; 
+        --primary-color-light: #EADBC8; 
+        --toggle-color: #A3B9CC;
+        --text-color: #6E6A59;
+        --text-color-ticket: #000000;
+        --text-color-ticket-mouse: #f0f0f0;
+        --table-header: #EADBC8;
+        --table-row-odd: #f9f5f1;
+        --table-row-even: #ffffff;
+        --table-border: #D4A373;
+        
+        --tran-02: all 0.2s ease;
+        --tran-03: all 0.3s ease;
+        --tran-04: all 0.4s ease;
+        --tran-05: all 0.5s ease;
+    }
+    
+    body{
+        height: 100vh;
+        background: var(--body-color);
+        transition: var(--tran-02);
+    }
+    
+    body.dark{
+        --body-color: #1e2731;
+        --sidebar-color:#161b22;
+        --primary-color:#3a3b3c;
+        --primary-color-light: #3a3b3c;
+        --toggle-color:#fff;
+        --text-color:#ccc;
+        --text-color-ticket: #ffffff;
+        --text-color-ticket-mouse: #464040;
+        --table-header: #2a2a2a;
+        --table-row-odd: #1e2731;
+        --table-row-even: #242d36;
+        --table-border: #3a3b3c;
+    }
+    
+    .sidebar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 250px;
+        padding: 10px 14px;
+        background: var(--sidebar-color);
+        transition: var(--tran-05);
+        z-index: 100;
+        border-radius: 0 10px 10px 0;
+    }
+    
+    .sidebar.close{
+        width: 88px;
+    }
+    
+    .sidebar .text{
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--text-color);
+        transition: var(--tran-05);
+        white-space: nowrap;
+        opacity: 1;
+    }
+    
+    .sidebar.close .text{
+        opacity: 0;
+    }
+    
+    .sidebar .imagen{
+        min-width: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .sidebar li{
+        height: 50px;
+        margin-top: 10px;
+        list-style: none;
+        display: flex;
+        align-items: center;
+    }
+    
+    .sidebar li .icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 60px;
+        font-size: 20px;
+    }
+    
+    .sidebar li .icon,
+    .sidebar li .text{
+        color: var(--text-color);
+        transition: var(--tran-02);
+    }
+    
+    .sidebar header {
+        position: relative;
+    }
+    
+    .sidebar .img-text img{
+        width: 40px;
+        border-radius: 6px;
+    }
+    
+    .sidebar header .img-text{
+        display: flex;
+        align-items: center;
+    }
+    
+    .sidebar .img-text .header-text{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .header-text .name{
+        font-weight: 600;
+    }
+    
+    .header-text .desc{
+        margin-top: -2px;
+    }
+    
+    .sidebar header .toggle{
+        position: absolute;
+        top: 50%;
+        right: -25px;
+        transform: translateY(-50%);
+        height: 25px;
+        width: 25px;
+        background: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: var(--sidebar-color);
+        font-size: 20px;
+    }
+    
+    .slider.close header .toggle{
+        transform: translateY(-50%) rotate(180deg);
+    }
+    
+    body.dark .slider header .toggle{
+        transform: rotate(180deg);
+        color: var(--text-color);
+    }
+    
+    .sidebar .menu{
+        margin-top: 30px;
+    }
+    
+    .sidebar li a {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: var(--tran-04);
+    }
+    
+    .sidebar li a:hover{
+        background: var(--primary-color);
+    }
+    
+    .sidebar li:hover a .icon,
+    .sidebar li:hover a .text{
+        color: var(--sidebar-color);
+    }
+    
+    body.dark .sidebar li:hover a .icon,
+    body.dark .sidebar li:hover a .text{
+        color: var(--text-color);
+    }
+    
+    .sidebar .menu-bar{
+        height: calc(100% - 50px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .menu-bar .mode{
+        position: relative;
+        border-radius: 10px;
+        background: var(--primary-color-light);
+    }
+    
+    .menu-bar .mode .moon-sun{
+        height: 50px;
+        width: 60px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .menu-bar .mode i{
+        position: absolute;
+        transition: var(--tran-03);
+    }
+    
+    body.dark .menu-bar .mode i.sun {
+        opacity: 1;
+    }
+    
+    body.dark .menu-bar .mode i.moon {
+        opacity: 1;
+    }
+    
+    .menu-bar .mode i.sun{
+        opacity: 0;
+    }
+    
+    .menu-bar .mode .toggle-switch{
+        border-radius: 10px;
+        position: absolute;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        min-width: 60px;
+        cursor: pointer;
+        background: var(--primary-color-light);
+    }
+    
+    .toggle-switch .switch{
+        border-radius: 25px;
+        position: relative;
+        height: 22px;
+        width: 44px;
+        background: var(--toggle-color);
+    }
+    
+    .switch::before{
+        content: '';
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        background: var(--sidebar-color);
+        transition: var(--tran-03);
+    }
+    
+    body.dark .switch::before{
+        left: 24px;
+    }
+    
+    .home1{
+        position: relative;
+        height: 20px;
+        left: 250px;
+        width: calc(100% - 250px);
+        background: var(--body-color);
+        transition: var(--tran-05);
+    }
+
+    .sidebar.close ~ .home1{
+        left: 88px;
+        width: calc(100% - 88px);
+    }
+    
+    .home{
+        position: relative;
+        height: 40px;
+        left: 250px;
+        width: calc(100% - 250px);
+        transition: var(--tran-05);
+    }
+
+    .home .text{
+        font-size: 30px;
+        font-weight: 500;
+        padding: 8px 10px;
+        color: var(--text-color);
+    }
+    
+    .sidebar.close ~ .home{
+        left: 88px;
+        width: calc(100% - 88px);
+    }
+    
+    .home {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 20px 30px 20px;
+        transition: var(--tran-05);
+        background: var(--body-color);
+    }
+    .home .search-form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .home input[type="text"] {
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid #3c4145;
+        width: 600px;
+    }
+    
+    .home .search-form .search-input {
+        width: 600px;
+        background: red;
+    }
+    
+    .home button {
+        padding: 5px 10px;
+        border: none;
+        background-color: var(--sidebar-color);
+        color: var(--text-color);
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .home button:hover {
+        background-color: var(--primary-color);
+    }
+    
+    .home .info {
+        font-size: 14px;
+    }
+
+    /* TABLAS MEJORADAS */
+    .tabla-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        left: 250px;
+        width: calc(100% - 250px);
+        background: var(--body-color);
+        transition: var(--tran-05);
+        padding: 31px 0;
+    }
+
+    .sidebar.close ~ .tabla-container {
+        left: 88px;
+        width: calc(100% - 88px);
+    }
+
+    .tabla-header {
+        width: 85%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 0 10px;
+    }
+
+    .tabla-title {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: var(--text-color);
+    }
+
+    .tabla-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .tabla-actions button {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--primary-color);
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: var(--tran-03);
+    }
+
+    .tabla-actions button:hover {
+        background-color: var(--text-color);
+    }
+
+    .tabla-actions button.remove {
+        background-color: #d37373;
+    }
+
+    .tabla-actions button.remove:hover {
+        background-color: #a95555;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 85%;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    th {
+        background-color: var(--table-header);
+        color: var(--text-color);
+        font-weight: bold;
+        text-align: center;
+        padding: 12px 15px;
+        border: 1px solid var(--table-border);
+    }
+
+    td {
+        padding: 10px 15px;
+        text-align: center;
+        border: 1px solid var(--table-border);
+        color: var(--text-color-ticket);
+    }
+
+    tr:nth-child(odd) {
+        background-color: var(--table-row-odd);
+    }
+
+    tr:nth-child(even) {
+        background-color: var(--table-row-even);
+    }
+
+    tr:hover {
+        background-color: var(--primary-color-light);
+    }
+
+    /* FORMULARIOS MEJORADOS */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: flex-start;
+        z-index: 9999;
+        overflow-y: auto;
+    }
+    
+    .modal-content {
+        background-color: var(--body-color);
+        padding: 20px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 500px;
+        margin-top: 50px;
+        max-height: calc(100vh - 100px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: auto;
+    }
+    
+    .modal-content h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--text-color-ticket);
+        font-family: 'Times New Roman', Times, serif;
+    }
+    
+    .modal-content label {
+        display: block;
+        margin: 10px 0 5px;
+        color: var(--text-color-ticket);
+        font-weight: bold;
+    }
+    
+    .modal-content input[type="text"],
+    .modal-content input[type="date"],
+    .modal-content input[type="number"],
+    .modal-content select,
+    .modal-content textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid var(--table-border);
+        border-radius: 5px;
+        background-color: var(--table-row-odd);
+        color: var(--text-color-ticket);
+    }
+    
+    .modal-content textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+    
+    .modal-content .buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .modal-content button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: var(--tran-03);
+    }
+    
+    .modal-content button[type="submit"] {
+        background-color: var(--primary-color);
+        color: white;
+    }
+    
+    .modal-content button[type="submit"]:hover {
+        background-color: var(--text-color);
+    }
+    
+    .modal-content button.close {
+        background-color: #d4d4d4;
+        color: #333;
+    }
+    
+    .modal-content button.close:hover {
+        background-color: #bdbdbd;
+    }
+
+    fieldset {
+        border: 1px solid var(--table-border);
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    legend {
+        padding: 0 10px;
+        color: var(--text-color-ticket);
+        font-weight: bold;
+    }
+
+    /* Estilos para los modales de eliminación */
+    .select-delete {
+        width: 100%;
+        padding: 10px;
+        margin: 20px 0;
+        border: 1px solid var(--table-border);
+        border-radius: 5px;
+        background-color: var(--table-row-odd);
+        color: var(--text-color-ticket);
+    }
+
+    .delete-btn {
+        background-color: #d37373 !important;
+        color: white !important;
+    }
+
+    .delete-btn:hover {
+        background-color: #a95555 !important;
+    }
+
+    /* Estilos para las opciones del select */
+    select option {
+        padding: 8px;
+    }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="img-text">
+                <span class="imagen">
+                    <img src="/Login/logo.png" alt="logo">
+                </span>
+
+                <div class="text header-text">
+                    <span class="name">TecnoBuild</span>
+                    <span class="desc">Construccion inteligente</span>
+                </div>
+            </div>
+            <i class='bx bx-menu toggle'></i>
+        </header>
+        
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="/Principal/obras.html">
+                            <i class='bx bx-home icon'></i>
+                            <span class="text nav-text">Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="herramienta.html">
+                            <i class='bx bx-wrench icon'></i>
+                            <span class="text nav-text">Herramienta</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="/winMat/material.html">
+                            <i class='bx bx-box icon'></i>
+                            <span class="text nav-text">Material</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="/winEmp/empleado.html">
+                            <i class='bx bx-user icon' ></i>
+                            <span class="text nav-text">Empleado</span>
+                        </a>
+                </ul>
+            </div>
+            <div class="bottom-content">
+                <li class="">
+                    <a href="#" id="profileBtn">
+                        <i class='bx bx-user-circle icon' ></i>
+                        <span class="text nav-text">Mi Perfil</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="index.html">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Salir</span>
+                    </a>
+                </li>
+
+                <li class="mode">
+                    <div class="moon-sun">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Modo oscuro</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home1"></section>
+    <section class="home">
+        <form action="search.html" method="get" class="search-form">
+            <input type="text" name="query" placeholder="Buscar...">
+            <button type="submit"><i class='bx bx-search'></i></button>
+        </form>
+    </section>
+
+
+    <!-- SEGUNDA TABLA: CATÁLOGO DE HERRAMIENTAS (MODIFICADO) -->
+    <section class="tabla-container">
+        <div class="tabla-header">
+            <h2 class="tabla-title">CAPTURACIÓN DE HERRAMIENTA EN GENERAL</h2>
+            <div class="tabla-actions">
+                <button id="openModalHerramienta" class="add"><i class='bx bx-plus'></i> Agregar</button>
+                <button id="openDeleteModalHerramienta" class="remove"><i class='bx bx-trash'></i> Eliminar</button>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Medida</th>
+                    <th>Marca</th>
+                    <th>Responsable Registro</th>
+                    <th>Cantidad Disponible</th>
+                    <th>Cantidad General</th>
+                </tr>
+            </thead>
+            <tbody id="herramienta-tbody">
+                <!-- La tabla se llenará dinámicamente con JavaScript -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- TERCERA TABLA: HISTORIAL DE BAJAS -->
+    <section class="tabla-container">
+        <div class="tabla-header">
+            <h2 class="tabla-title">Historial de Bajas de Herramientas</h2>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre de herramienta</th>
+                    <th>Fecha de baja</th>
+                    <th>Hora</th>
+                    <th>Motivo</th>
+                    <th>Responsable</th>
+                </tr>
+            </thead>
+            <tbody id="bajas-tbody">
+                <!-- La tabla se llenará dinámicamente con JavaScript -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- MODAL PARA REGISTRAR MOVIMIENTO DE HERRAMIENTAS -->
+    <div class="modal" id="formModalMovimiento">
+        <div class="modal-content">
+            <h2>Registrar Movimiento de Herramienta</h2>
+            <form>
+                <fieldset>
+                    <legend>Información del movimiento:</legend>
+                    <label for="name-rec">Responsable que recibe:</label>
+                    <input type="text" id="name-rec" name="name-rec" placeholder="Nombre completo" required>
+    
+                    <label for="name-entr">Responsable de entrega:</label>
+                    <input type="text" id="name-entr" name="name-entr" placeholder="Nombre completo" required>
+    
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" name="cantidad" min="1" required>
+                    
+                    <label for="tipo-unidad">Tipo de unidad:</label>
+                    <select id="tipo-unidad" name="tipo-unidad" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="piezas">Piezas</option>
+                        <option value="toneladas">Toneladas</option>
+                        <option value="kilos">Kilos</option>
+                        <option value="metros">Metros</option>
+                        <option value="metros_cuadrados">Metros cuadrados</option>
+                        <option value="metros_cubicos">Metros cúbicos</option>
+                        <option value="litros">Litros</option>
+                        <option value="bultos">Bultos</option>
+                        <option value="sacos">Sacos</option>
+                        <option value="cubetas">Cubetas</option>
+                        <option value="tabiques">Tabiques/Ladrillos</option>
+                        <option value="varillas">Varillas</option>
+                        <option value="placas">Placas</option>
+                        <option value="lotes">Lotes</option>
+                        <option value="rollos">Rollos</option>
+                        <option value="paquetes">Paquetes</option>
+                        <option value="camiones">Camiones</option>
+                        <option value="viajes">Viajes</option>
+                    </select>
+    
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+    
+                    <label for="obra-s">Semana de obra:</label>
+                    <input type="text" id="obra-s" name="obra-s" required placeholder="Semana N">
+    
+                    <label for="obra-salida">Obra de salida:</label>
+                    <input type="text" id="obra-salida" name="obra-salida" required placeholder="Col, mza, lote, calle...">
+
+                    <label for="obra-entrada">Obra de entrada:</label>
+                    <input type="text" id="obra-entrada" name="obra-entrada" required placeholder="Col, mza, lote, calle...">
+
+                    <label for="detalles">Detalles de herramienta:</label>
+                    <textarea id="detalles" name="detalles" rows="3" maxlength="200" placeholder="Describa el estado y características relevantes..."></textarea>
+                </fieldset>
+                
+                <div class="buttons">
+                    <button type="button" class="close" id="closeModalMovimiento">Cancelar</button>
+                    <button type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+        <!-- MODAL PARA AGREGAR HERRAMIENTA (MODIFICADO) -->
+        <div class="modal" id="formModalHerramienta">
+            <div class="modal-content">
+                <h2>Agregar Nueva Herramienta</h2>
+                <form>
+                    <fieldset>
+                        <legend>Información de la herramienta:</legend>
+                        <label for="nombre-herramienta">Nombre:</label>
+                        <input type="text" id="nombre-herramienta" name="nombre-herramienta" placeholder="Ej: Martillo, Taladro, Sierra..." required>
+
+                        <label for="tipo-herramienta">Tipo:</label>
+                        <select id="tipo-herramienta" name="tipo-herramienta" required>
+                            <option value="">Seleccione un tipo</option>
+                            <option value="manual">Herramienta manual</option>
+                            <option value="electrica">Herramienta eléctrica</option>
+                            <option value="medicion">Herramienta de medición</option>
+                            <option value="corte">Herramienta de corte</option>
+                            <option value="sujecion">Herramienta de sujeción</option>
+                            <option value="otro">Otro</option>
+                        </select>
+
+                        <label for="medida-herramienta">Medida:</label>
+                        <input type="text" id="medida-herramienta" name="medida-herramienta" placeholder="Ej: 16 oz, 1/2 pulg, 10 metros..." required>
+                        
+                        <label for="marca-herramienta">Marca:</label>
+                        <input type="text" id="marca-herramienta" name="marca-herramienta" placeholder="Ej: DeWalt, Stanley, Truper..." required>
+                        
+                        <label for="responsable-registro">Responsable del registro:</label>
+                        <input type="text" id="responsable-registro" name="responsable-registro" placeholder="Nombre completo del responsable" required>
+                        
+                        <label for="cantidad-disponible">Cantidad Disponible (fuera de obra):</label>
+                        <input type="number" id="cantidad-disponible" name="cantidad-disponible" min="0" required>
+                        
+                        <label for="cantidad-general">Cantidad General (total):</label>
+                        <input type="number" id="cantidad-general" name="cantidad-general" min="1" required>
+                        
+                    </fieldset>
+                    
+                    <div class="buttons">
+                        <button type="button" class="close" id="closeModalHerramienta">Cancelar</button>
+                        <button type="submit">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    <!-- MODAL PARA ELIMINAR MOVIMIENTO DE HERRAMIENTAS -->
+    <div class="modal" id="deleteModalMovimiento">
+        <div class="modal-content">
+            <h2>Eliminar Movimiento</h2>
+            <p>Selecciona el movimiento que deseas eliminar:</p>
+            
+            <select id="select-movimiento-delete" class="select-delete">
+                <option value="">No hay movimientos disponibles</option>
+            </select>
+            
+            <div class="buttons">
+                <button type="button" class="close" id="cancelDeleteMovimiento">Cancelar</button>
+                <button type="button" class="delete-btn" id="confirmDeleteMovimiento">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PARA ELIMINAR HERRAMIENTA -->
+    <div class="modal" id="deleteModalHerramienta">
+        <div class="modal-content">
+            <h2>Eliminar Herramienta</h2>
+            <p>Selecciona la herramienta que deseas eliminar:</p>
+            
+            <select id="select-herramienta-delete" class="select-delete">
+                <option value="">No hay herramientas disponibles</option>
+            </select>
+            
+            <div class="buttons">
+                <button type="button" class="close" id="cancelDeleteHerramienta">Cancelar</button>
+                <button type="button" class="delete-btn" id="confirmDeleteHerramienta">Eliminar</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="profileModal">
+    <div class="modal-content">
+        <h2>Perfil de Usuario</h2>
+        <form>
+            <fieldset>
+                <legend>Información personal:</legend>
+                
+                <label for="usuario-perfil">Usuario:</label>
+                <input type="text" id="usuario-perfil" name="usuario-perfil" value="tecno_usuario" readonly>
+                
+                <label for="nombre-perfil">Nombre completo:</label>
+                <input type="text" id="nombre-perfil" name="nombre-perfil" value="Juan Pérez Rodríguez" readonly>
+                
+                <label for="correo-perfil">Correo electrónico:</label>
+                <input type="email" id="correo-perfil" name="correo-perfil" value="juan.perez@tecnobuild.com" readonly>
+                
+                <button type="button" id="cambiarPasswordBtn" style="margin-top: 20px; background-color: var(--primary-color); color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">
+                    <i class='bx bx-lock-alt'></i> Cambiar Contraseña
+                </button>
+            </fieldset>
+            
+            <div class="buttons">
+                <button type="button" class="close" id="closeProfileModal">Cerrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+    <script>
+    // Wait for the DOM to be fully loaded before executing scripts
+    document.addEventListener("DOMContentLoaded", function() {
+        // Script para la funcionalidad de la barra lateral
+        const body = document.querySelector("body");
+        const sidebar = body.querySelector(".sidebar");
+        const toggle = body.querySelector(".toggle");
+        const modeSwitch = body.querySelector(".toggle-switch");
+        const modeText = body.querySelector(".mode-text");
+        
+        
+        // Toggle sidebar
+    if (toggle) {
+        toggle.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+            
+            // Cerrar todos los submenús cuando se cierra/abre el sidebar
+            document.querySelectorAll('.nav-link.open').forEach(item => {
+                item.classList.remove('open');
+            });
+        });
+    }
+
+        // Tema oscuro y claro
+    if (modeSwitch) {
+        modeSwitch.addEventListener("click", () => {
+            body.classList.toggle("dark");
+            
+            if (body.classList.contains("dark")) {
+                modeText.innerText = "Modo claro";
+                // Guardar el modo oscuro en localStorage
+                localStorage.setItem("theme", "dark");
+            } else {
+                modeText.innerText = "Modo oscuro";
+                // Guardar el modo claro en localStorage
+                localStorage.setItem("theme", "light");
+            }
+        });
+    }
+    
+   // Cargar tema guardado
+   const savedTheme = localStorage.getItem("theme");
+    
+    if (savedTheme === "dark") {
+        body.classList.add("dark");
+        if (modeText) modeText.innerText = "Modo claro";
+    } else {
+        body.classList.remove("dark");
+        if (modeText) modeText.innerText = "Modo oscuro";
+    }
+    
+
+        // MODALES PARA AGREGAR ELEMENTOS
+        // Modal de movimiento de herramientas
+        const openModalMovimiento = document.getElementById("openModalMovimiento");
+        const closeModalMovimiento = document.getElementById("closeModalMovimiento");
+        const modalMovimiento = document.getElementById("formModalMovimiento");
+
+        if (openModalMovimiento && closeModalMovimiento && modalMovimiento) {
+            openModalMovimiento.addEventListener("click", () => {
+                modalMovimiento.style.display = "flex";
+            });
+
+            closeModalMovimiento.addEventListener("click", () => {
+                modalMovimiento.style.display = "none";
+            });
+        }
+
+        // Modal de catálogo de herramientas
+        const openModalHerramienta = document.getElementById("openModalHerramienta");
+        const closeModalHerramienta = document.getElementById("closeModalHerramienta");
+        const modalHerramienta = document.getElementById("formModalHerramienta");
+
+        if (openModalHerramienta && closeModalHerramienta && modalHerramienta) {
+            openModalHerramienta.addEventListener("click", () => {
+                modalHerramienta.style.display = "flex";
+            });
+
+            closeModalHerramienta.addEventListener("click", () => {
+                modalHerramienta.style.display = "none";
+            });
+        }
+
+        // MODALES PARA ELIMINAR ELEMENTOS
+        // Modal para eliminar movimiento
+        const openDeleteModalMovimiento = document.getElementById("openDeleteModalMovimiento");
+        const deleteModalMovimiento = document.getElementById("deleteModalMovimiento");
+        const cancelDeleteMovimiento = document.getElementById("cancelDeleteMovimiento");
+        const confirmDeleteMovimiento = document.getElementById("confirmDeleteMovimiento");
+        const selectMovimientoDelete = document.getElementById("select-movimiento-delete");
+
+        if (openDeleteModalMovimiento && deleteModalMovimiento) {
+            openDeleteModalMovimiento.addEventListener("click", () => {
+                // Cargar opciones en el select
+                loadMovimientoOptions();
+                deleteModalMovimiento.style.display = "flex";
+            });
+        }
+
+        if (cancelDeleteMovimiento) {
+            cancelDeleteMovimiento.addEventListener("click", () => {
+                deleteModalMovimiento.style.display = "none";
+            });
+        }
+
+        // Modal para eliminar herramienta
+        const openDeleteModalHerramienta = document.getElementById("openDeleteModalHerramienta");
+        const deleteModalHerramienta = document.getElementById("deleteModalHerramienta");
+        const cancelDeleteHerramienta = document.getElementById("cancelDeleteHerramienta");
+        const confirmDeleteHerramienta = document.getElementById("confirmDeleteHerramienta");
+        const selectHerramientaDelete = document.getElementById("select-herramienta-delete");
+
+        if (openDeleteModalHerramienta && deleteModalHerramienta) {
+            openDeleteModalHerramienta.addEventListener("click", () => {
+                // Cargar opciones en el select
+                loadHerramientaOptions();
+                deleteModalHerramienta.style.display = "flex";
+            });
+        }
+
+        if (cancelDeleteHerramienta) {
+            cancelDeleteHerramienta.addEventListener("click", () => {
+                deleteModalHerramienta.style.display = "none";
+            });
+        }
+
+        // Cerrar modales al hacer clic fuera de ellos
+        window.addEventListener("click", (event) => {
+            if (modalMovimiento && event.target === modalMovimiento) {
+                modalMovimiento.style.display = "none";
+            }
+            if (modalHerramienta && event.target === modalHerramienta) {
+                modalHerramienta.style.display = "none";
+            }
+            if (deleteModalMovimiento && event.target === deleteModalMovimiento) {
+                deleteModalMovimiento.style.display = "none";
+            }
+            if (deleteModalHerramienta && event.target === deleteModalHerramienta) {
+                deleteModalHerramienta.style.display = "none";
+            }
+        });
+
+        // Funcionalidad para agregar elementos a las tablas
+        const formMovimiento = document.querySelector("#formModalMovimiento form");
+        const formHerramienta = document.querySelector("#formModalHerramienta form");
+        const tbodyMovimiento = document.getElementById("movimiento-tbody");
+        const tbodyHerramienta = document.getElementById("herramienta-tbody");
+        const tbodyBajas = document.getElementById("bajas-tbody");
+
+        // Función para agregar filas a la tabla de movimientos
+        if (formMovimiento && tbodyMovimiento) {
+            formMovimiento.addEventListener("submit", (e) => {
+                e.preventDefault();
+                
+                // Obtener valores del formulario
+                const responsableRecibe = document.getElementById("name-rec").value;
+                const responsableEntrega = document.getElementById("name-entr").value;
+                const cantidad = document.getElementById("cantidad").value;
+                const tipoUnidad = document.getElementById("tipo-unidad").value;
+                const fecha = document.getElementById("fecha").value;
+                const semanaObra = document.getElementById("obra-s").value;
+                const obraSalida = document.getElementById("obra-salida").value;
+                const obraEntrada = document.getElementById("obra-entrada").value;
+                const detalles = document.getElementById("detalles").value;
+                
+                // Crear nueva fila
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <td>${responsableRecibe}</td>
+                    <td>${responsableEntrega}</td>
+                    <td>${cantidad}</td>
+                    <td>${tipoUnidad}</td>
+                    <td>${formatDate(fecha)}</td>
+                    <td>${semanaObra}</td>
+                    <td>${obraSalida}</td>
+                    <td>${obraEntrada}</td>
+                    <td>${detalles}</td>
+                `;
+                
+                // Agregar la nueva fila a la tabla
+                tbodyMovimiento.appendChild(newRow);
+                
+                // Cerrar el modal y resetear el formulario
+                modalMovimiento.style.display = "none";
+                formMovimiento.reset();
+            });
+        }
+        
+        // Función para agregar filas a la tabla de herramientas (modificado)
+        if (formHerramienta && tbodyHerramienta) {
+            formHerramienta.addEventListener("submit", (e) => {
+                e.preventDefault();
+                
+                // Obtener valores del formulario
+                const nombre = document.getElementById("nombre-herramienta").value;
+                const tipo = document.getElementById("tipo-herramienta").options[document.getElementById("tipo-herramienta").selectedIndex].text;
+                const medida = document.getElementById("medida-herramienta").value;
+                const marca = document.getElementById("marca-herramienta").value;
+                const responsable = document.getElementById("responsable-registro").value;
+                const cantidadDisponible = document.getElementById("cantidad-disponible").value;
+                const cantidadGeneral = document.getElementById("cantidad-general").value;
+                
+                // Crear nueva fila
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <td>${nombre}</td>
+                    <td>${tipo}</td>
+                    <td>${medida}</td>
+                    <td>${marca}</td>
+                    <td>${responsable}</td>
+                    <td>${cantidadDisponible}</td>
+                    <td>${cantidadGeneral}</td>
+                `;
+                
+                // Agregar la nueva fila a la tabla
+                tbodyHerramienta.appendChild(newRow);
+                
+                // Cerrar el modal y resetear el formulario
+                modalHerramienta.style.display = "none";
+                formHerramienta.reset();
+            });
+        }
+        
+        // Función para eliminar movimiento seleccionado
+        if (confirmDeleteMovimiento && tbodyMovimiento) {
+            confirmDeleteMovimiento.addEventListener("click", () => {
+                const selectedIndex = selectMovimientoDelete.selectedIndex;
+                if (selectedIndex > 0) { // Si no es la opción por defecto
+                    const rowIndex = parseInt(selectMovimientoDelete.value);
+                    const rows = tbodyMovimiento.querySelectorAll("tr");
+                    if (rowIndex >= 0 && rowIndex < rows.length) {
+                        tbodyMovimiento.removeChild(rows[rowIndex]);
+                        deleteModalMovimiento.style.display = "none";
+                        alert("Movimiento eliminado correctamente");
+                    }
+                } else {
+                    alert("Por favor selecciona un movimiento para eliminar");
+                }
+            });
+        }
+        
+        // Función para eliminar herramienta seleccionada
+        if (confirmDeleteHerramienta && tbodyHerramienta && tbodyBajas) {
+            confirmDeleteHerramienta.addEventListener("click", () => {
+                const selectedIndex = selectHerramientaDelete.selectedIndex;
+                if (selectedIndex > 0) { // Si no es la opción por defecto
+                    const rowIndex = parseInt(selectHerramientaDelete.value);
+                    const rows = tbodyHerramienta.querySelectorAll("tr");
+                    if (rowIndex >= 0 && rowIndex < rows.length) {
+                        const nombreHerramienta = rows[rowIndex].cells[0].textContent;
+                        
+                        // Registrar la baja en la tabla de bajas
+                        registrarBaja(nombreHerramienta);
+                        
+                        // Eliminar de la tabla de herramientas
+                        tbodyHerramienta.removeChild(rows[rowIndex]);
+                        deleteModalHerramienta.style.display = "none";
+                        alert("Herramienta eliminada correctamente");
+                    }
+                } else {
+                    alert("Por favor selecciona una herramienta para eliminar");
+                }
+            });
+        }
+        
+        // Función para registrar una baja en la tabla correspondiente
+        function registrarBaja(nombreHerramienta) {
+            if (!tbodyBajas) return;
+            
+            const fechaActual = new Date();
+            const fechaFormateada = `${padZero(fechaActual.getDate())}/${padZero(fechaActual.getMonth() + 1)}/${fechaActual.getFullYear()}`;
+            const horaFormateada = `${padZero(fechaActual.getHours())}:${padZero(fechaActual.getMinutes())}`;
+            
+            // Crear nueva fila para la tabla de bajas
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td>${nombreHerramienta}</td>
+                <td>${fechaFormateada}</td>
+                <td>${horaFormateada}</td>
+                <td>Baja por sistema</td>
+                <td>Usuario actual</td>
+            `;
+            
+            // Agregar la nueva fila a la tabla de bajas
+            tbodyBajas.appendChild(newRow);
+        }
+        
+        // Función para cargar las opciones del select de movimientos
+        function loadMovimientoOptions() {
+            if (!selectMovimientoDelete || !tbodyMovimiento) return;
+            
+            // Limpiar opciones actuales
+            selectMovimientoDelete.innerHTML = '<option value="">No hay movimientos disponibles</option>';
+            
+            const rows = tbodyMovimiento.querySelectorAll("tr");
+            if (rows.length === 0) return;
+            
+            // Agregar cada movimiento como una opción
+            rows.forEach((row, index) => {
+                const recibe = row.cells[0].textContent;
+                const entrega = row.cells[1].textContent;
+                const fecha = row.cells[4].textContent;
+                const option = document.createElement("option");
+                option.value = index;
+                option.textContent = `Movimiento de ${entrega} a ${recibe} - ${fecha}`;
+                selectMovimientoDelete.appendChild(option);
+            });
+        }
+        
+        // Función para cargar las opciones del select de herramientas
+        function loadHerramientaOptions() {
+            if (!selectHerramientaDelete || !tbodyHerramienta) return;
+            
+            // Limpiar opciones actuales
+            selectHerramientaDelete.innerHTML = '<option value="">No hay herramientas disponibles</option>';
+            
+            const rows = tbodyHerramienta.querySelectorAll("tr");
+            if (rows.length === 0) return;
+            
+            // Agregar cada herramienta como una opción
+            rows.forEach((row, index) => {
+                const nombre = row.cells[0].textContent;
+                const tipo = row.cells[1].textContent;
+                const marca = row.cells[3].textContent;
+                const option = document.createElement("option");
+                option.value = index;
+                option.textContent = `${nombre} - ${marca} (${tipo})`;
+                selectHerramientaDelete.appendChild(option);
+            });
+        }
+
+        // Funciones auxiliares
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return `${padZero(date.getDate())}/${padZero(date.getMonth() + 1)}/${date.getFullYear()}`;
+        }
+        
+        function padZero(num) {
+            return num.toString().padStart(2, '0');
+        }
+    });
+
+    // Modal de perfil
+    const openProfileModal = document.getElementById("openProfileModal");
+    const closeProfileModal = document.getElementById("closeProfileModal");
+    const profileModal = document.getElementById("profileModal");
+    const cambiarPasswordBtn = document.getElementById("cambiarPasswordBtn");
+
+    if (openProfileModal && closeProfileModal && profileModal) {
+        openProfileModal.addEventListener("click", (e) => {
+            e.preventDefault();
+            profileModal.style.display = "flex";
+        });
+
+        closeProfileModal.addEventListener("click", () => {
+            profileModal.style.display = "none";
+        });
+        
+        cambiarPasswordBtn.addEventListener("click", () => {
+            alert("Funcionalidad de cambio de contraseña en desarrollo");
+        });
+        
+        // Cerrar modal al hacer clic fuera de él
+        window.addEventListener("click", (event) => {
+            if (event.target === profileModal) {
+                profileModal.style.display = "none";
+            }
+        });
+    }
+    </script>
+
+</body>
+</html>

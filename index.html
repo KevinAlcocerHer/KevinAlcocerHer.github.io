@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="logo.png">
+    <title>TecnoBuild: Inicio de sesión</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-section">
+            <div class="logo">
+                <i class='bx bx-buildings'></i>
+            </div>
+            <h1 class="brand-name">TecnoBuild</h1>
+            <p class="brand-tagline">Construcción Inteligente</p>
+        </div>
+
+        <form class="login-form">
+            <h2 class="form-title">Iniciar Sesión</h2>
+            
+            <div class="form-group">
+                <label for="usuario">Usuario</label>
+                <div class="input-wrapper">
+                    <input type="text" id="usuario" placeholder="Ingrese su nombre de usuario" required>
+                    <i class='bx bx-user'></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="contrasena">Contraseña</label>
+                <div class="input-wrapper">
+                    <input type="password" id="contrasena" placeholder="Ingrese su contraseña" required>
+                    <i class='bx bx-lock-alt'></i>
+                </div>
+            </div>
+
+            <div class="forgot-password">
+                <a href="#" onclick="showContactModal()">¿Olvidó su contraseña?</a>
+            </div>
+
+            <button type="submit" class="login-btn">
+                Ingresar
+            </button>
+
+            <div class="contact-section">
+                <p class="contact-text">¿Necesita ayuda o más información?</p>
+                <a href="#" class="contact-link" onclick="showContactModal()">Contáctanos</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal de Contacto -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Información de Contacto</h2>
+                <p>Estamos aquí para ayudarte</p>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class='bx bx-phone'></i>
+                    <div class="contact-details">
+                        <h4>Teléfono</h4>
+                        <p>+52 (747) 123-4567</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class='bx bx-envelope'></i>
+                    <div class="contact-details">
+                        <h4>Correo Electrónico</h4>
+                        <p>contacto@tecnobuild.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class='bx bx-map'></i>
+                    <div class="contact-details">
+                        <h4>Oficina Principal</h4>
+                        <p>Chilpancingo, Guerrero, México</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class='bx bx-time'></i>
+                    <div class="contact-details">
+                        <h4>Horario de Atención</h4>
+                        <p>Lunes a Viernes: 8:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="close-modal" onclick="closeContactModal()">
+                Cerrar
+            </button>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

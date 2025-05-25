@@ -1,0 +1,1197 @@
+* {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  section {
+    padding: 15px;
+  }
+  
+  /* Ensure logo visibility */
+  .sidebar .img-text img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    display: block; /* Ensure it's visible */
+    opacity: 1; /* Make sure it's not transparent */
+  }
+  
+  /* Fix sidebar text in mobile */
+  .sidebar.close .text {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+
+  section {
+    padding: 10px;
+  }
+  
+  .etiquetas {
+    padding: 10px;
+    left: 98px;
+    width: calc(100% - 108px);
+  }
+  
+  .descripcion .text-t {
+    font-size: 1.1rem;
+  }
+  
+  .descripcion .text-et {
+    font-size: 0.9rem;
+  }
+  
+  /* Ensure logo is visible on small screens */
+  .sidebar {
+    width: 80px;
+    padding: 10px 5px; /* Reduce padding */
+  }
+  
+  .sidebar.close {
+    width: 80px;
+  }
+  
+  .sidebar .imagen {
+    min-width: 40px; /* Reduce minimum width */
+  }
+  
+  /* Critical fix for the logo */
+  .sidebar .img-text {
+    justify-content: center;
+    display: flex !important; /* Force display */
+  }
+  
+  .sidebar .img-text img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    display: block !important; /* Force display */
+    margin: 0 auto;
+    opacity: 1 !important; /* Force visibility */
+    visibility: visible !important; /* Force visibility */
+  }
+  
+  /* Hide text but show logo when sidebar is closed */
+  .sidebar.close .text {
+    display: none;
+  }
+  
+  .sidebar.close .img-text .header-text {
+    display: none;
+  }
+  
+  .sidebar.close .img-text img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .sidebar.close ~ .home,
+  .sidebar.close ~ .etiquetas {
+    left: 90px;
+    width: calc(100% - 100px);
+  }
+  
+  /* Adjust the toggle button position */
+  .sidebar header .toggle {
+    right: -15px;
+    height: 22px;
+    width: 22px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .etiquetas {
+    left: 88px;
+    width: calc(100% - 98px);
+    padding: 5px;
+  }
+  
+  .descripcion .text-t {
+    font-size: 1rem;
+  }
+  
+  .descripcion .text-et {
+    font-size: 0.8rem;
+  }
+  
+  .text-final .text-t:nth-child(2) {
+    font-size: 1.5rem;
+  }
+  
+  /* Additional fixes for very small screens */
+  .sidebar {
+    width: 70px;
+  }
+  
+  .sidebar.close {
+    width: 70px;
+  }
+  
+  .sidebar.close ~ .home,
+  .sidebar.close ~ .etiquetas {
+    left: 80px;
+    width: calc(100% - 90px);
+  }
+  
+  /* Ensure logo visibility on smallest screens */
+  .sidebar .img-text img {
+    width: 30px;
+    height: 30px;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+:root {
+  --body-color: #fff; 
+  --sidebar-color: #D6CBBE; 
+  --primary-color: #D4A373; 
+  --primary-color-light: #EADBC8; 
+  --toggle-color: #A3B9CC;
+  --text-color: #6E6A59;
+  --text-color-ticket: #000000;
+  --text-color-ticket-mouse: #f0f0f0;
+
+  --tran-02: all 0.2s ease;
+  --tran-03: all 0.3s ease;
+  --tran-04: all 0.4s ease;
+  --tran-05: all 0.5s ease;
+}
+
+body {
+  height: 100vh;
+  background: var(--body-color);
+  transition: var(--tran-02);
+}
+
+body.dark {
+  --body-color: #1e2731;
+  --sidebar-color: #161b22;
+  --primary-color: #3a3b3c;
+  --primary-color-light: #3a3b3c;
+  --toggle-color: #fff;
+  --text-color: #ccc;
+  --text-color-ticket: #ffffff;
+  --text-color-ticket-mouse: #464040;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  padding: 10px 14px;
+  background: var(--sidebar-color);
+  transition: var(--tran-05);
+  z-index: 100;
+  border-radius: 0 10px 10px 0;
+}
+
+.sidebar.close {
+  width: 88px;
+}
+
+.sidebar .text {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-color);
+  transition: var(--tran-05);
+  white-space: nowrap;
+  opacity: 1;
+}
+
+.sidebar.close .text {
+  opacity: 0;
+}
+
+.sidebar .imagen {
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar li {
+  height: 50px;
+  margin-top: 10px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar li .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  font-size: 20px;
+}
+
+.sidebar li .icon,
+.sidebar li .text {
+  color: var(--text-color);
+  transition: var(--tran-02);
+}
+
+.sidebar header {
+  position: relative;
+}
+
+/* Important fix for the logo image */
+.sidebar .img-text img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: contain;
+  display: block; /* Ensure it's a block element */
+  opacity: 1; /* Ensure it's visible */
+  visibility: visible; /* Ensure it's visible */
+}
+
+.sidebar header .img-text {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .img-text .header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-text .name {
+  font-weight: 600;
+}
+
+.header-text .desc {
+  margin-top: -2px;
+}
+
+.sidebar header .toggle {
+  position: absolute;
+  top: 50%;
+  right: -25px;
+  transform: translateY(-50%);
+  height: 25px;
+  width: 25px;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--sidebar-color);
+  font-size: 20px;
+}
+
+.slider.close header .toggle {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+body.dark .slider header .toggle {
+  transform: rotate(180deg);
+  color: var(--text-color);
+}
+
+.sidebar .menu {
+  margin-top: 30px;
+}
+
+.sidebar li a {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: var(--tran-04);
+}
+
+.sidebar li a:hover {
+  background: var(--primary-color);
+}
+
+.sidebar li:hover a .icon,
+.sidebar li:hover a .text {
+  color: var(--sidebar-color);
+}
+
+body.dark .sidebar li:hover a .icon,
+body.dark .sidebar li:hover a .text {
+  color: var(--text-color);
+}
+
+.sidebar .menu-bar {
+  height: calc(100% - 50px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu-bar .mode {
+  position: relative;
+  border-radius: 10px;
+  background: var(--primary-color-light);
+}
+
+.menu-bar .mode .moon-sun {
+  height: 50px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.menu-bar .mode i {
+  position: absolute;
+  transition: var(--tran-03);
+}
+
+body.dark .menu-bar .mode i.sun {
+  opacity: 1;
+}
+
+body.dark .menu-bar .mode i.moon {
+  opacity: 1;
+}
+
+.menu-bar .mode i.sun {
+  opacity: 0;
+}
+
+.menu-bar .mode .toggle-switch {
+  border-radius: 10px;
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-width: 60px;
+  cursor: pointer;
+  background: var(--primary-color-light);
+}
+
+.toggle-switch .switch {
+  border-radius: 25px;
+  position: relative;
+  height: 22px;
+  width: 44px;
+  background: var(--toggle-color);
+}
+
+.switch::before {
+  content: '';
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  background: var(--sidebar-color);
+  transition: var(--tran-03);
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+}
+
+body.dark .switch::before {
+  left: 24px;
+}
+
+.home {
+  top: 50px;
+  position: relative;
+  text-align: center;
+  height: auto;
+  min-height: 100px;
+  left: 300px;
+  width: calc(100% - 300px);
+  transition: var(--tran-05);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.home .text {
+  font-size: 30px;
+  font-weight: 500;
+  width: auto;
+  padding: 8px 40px;
+  color: var(--text-color);
+  margin: auto;
+  border-radius: 10px;
+}
+
+.sidebar.close ~ .home {
+  left: 138px;
+  width: calc(100% - 138px);
+}
+
+/* Remaining CSS stays the same as before */
+/* ... */
+
+/* Estilos para submenús */
+.nav-link {
+  flex-direction: column;
+  height: auto;
+  min-height: 50px;
+}
+
+.menu-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+  cursor: pointer;
+}
+
+.menu-title a {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+}
+
+.arrow {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  padding-right: 10px;
+}
+
+.nav-link.open .arrow {
+  transform: rotate(180deg);
+}
+
+.submenu {
+  list-style: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding-left: 0;
+  width: 100%;
+}
+
+.nav-link.open .submenu {
+  max-height: 1000px; /* Valor alto para permitir cualquier número de elementos */
+}
+
+.submenu li {
+  height: 40px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.submenu li a {
+  display: flex;
+  align-items: center;
+  padding-left: 60px; /* Sangría para mostrar jerarquía */
+  color: var(--text-color);
+  text-decoration: none;
+  transition: var(--tran-03);
+  height: 100%;
+  background-color: var(--sidebar-color);
+}
+
+.submenu li a::before {
+  content: "•";
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.submenu li a:hover {
+  background-color: var(--primary-color);
+}
+
+.submenu li a:hover::before,
+.submenu li a:hover .text {
+  color: var(--sidebar-color);
+}
+
+.sidebar.close .submenu {
+  position: absolute;
+  left: 88px;
+  top: 0;
+  background-color: var(--sidebar-color);
+  width: 200px;
+  border-radius: 0 6px 6px 0;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height 0.3s ease, opacity 0.3s ease, pointer-events 0.3s ease;
+}
+
+.sidebar.close .nav-link:hover .submenu {
+  max-height: 1000px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar.close .menu-title {
+  justify-content: center;
+}
+
+.sidebar.close .arrow {
+  display: none;
+}
+
+.sidebar.close .submenu li a {
+  padding-left: 20px;
+}
+
+.nav-link.active .menu-title a,
+.submenu li.active a {
+  background-color: var(--primary-color);
+}
+
+.nav-link.active .menu-title a .icon,
+.nav-link.active .menu-title a .text,
+.submenu li.active a::before,
+.submenu li.active a .text {
+  color: var(--sidebar-color);
+}
+
+body.dark .submenu li a {
+  background-color: var(--sidebar-color);
+}
+
+body.dark .submenu li a:hover {
+  background-color: var(--primary-color);
+}
+
+body.dark .submenu li a:hover::before,
+body.dark .submenu li a:hover .text {
+  color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+  .sidebar.close .submenu {
+    left: 58px;
+    width: 180px;
+  }
+}
+
+/* Fin estilos para submenús */
+
+.etiquetas {
+  position: relative;
+  text-align: center;
+  justify-content: center;
+  height: 200px;
+  left: 300px;
+  width: calc(100% - 320px);
+  transition: var(--tran-05);
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  top: 100px;
+}
+
+.sidebar.close ~ .etiquetas {
+  left: 138px;
+  width: calc(100% - 158px);
+}
+
+.etiqueta {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--text-color-ticket);
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  height: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  background-color: var(--body-color);
+}
+
+.etiqueta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  background-color: var(--text-color-ticket-mouse);
+}
+
+.imagen {
+  width: 250px;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.etiqueta:hover .imagen img {
+  transform: scale(1.05);
+}
+
+.descripcion {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.descripcion .text-t {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  color: var(--text-color-ticket);
+  font-weight: 700;
+}
+
+.descripcion .text-et {
+  margin: 5px 0;
+  font-weight: 300;
+  color: var(--text-color-ticket);
+  display: flex;
+  align-items: center;
+}
+
+.descripcion .text-et i {
+  margin-right: 8px;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.text-final {
+  min-width: 120px;
+  text-align: center;
+  background-color: var(--primary-color-light);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.text-final .text-t:first-child {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.text-final .text-t:nth-child(2) {
+  font-size: 2rem;
+  margin: 5px 0 15px 0;
+  color: var(--text-color-ticket);
+  font-weight: 700;
+}
+
+.progreso {
+  width: 80%;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.barra-progreso {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+@media (max-width: 1024px) {
+  .imagen {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .etiqueta {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .etiquetas {
+    height: auto;
+    left: 138px;
+    width: calc(100% - 158px);
+  }
+  
+  .imagen {
+    width: 100%;
+    height: 180px;
+  }
+  
+  .descripcion {
+    width: 100%;
+    padding: 15px;
+  }
+  
+  .text-final {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .text-final .text-t:nth-child(2) {
+    margin: 0 15px 0 0;
+  }
+  
+  .progreso {
+    width: 50%;
+  }
+}
+
+body.dark .etiqueta {
+  background-color: var(--body-color);
+  border-color: var(--primary-color-light);
+}
+
+body.dark .text-final {
+  background-color: var(--primary-color);
+}
+
+body.dark .progreso {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+body.dark .barra-progreso {
+  background-color: var(--sidebar-color);
+}
+
+/* Estilos para el contenedor de botones */
+.botones-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+button {
+  width: 200px;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: var(--tran-03);
+}
+
+button:hover {
+  background-color: var(--text-color-ticket-mouse);
+  border: 1px solid var(--text-color);
+}
+
+/* Estilo para el botón de eliminar */
+.delete-btn {
+  background-color: #d9534f; /* Color rojo para indicar acción destructiva */
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c9302c;
+  border: 1px solid var(--text-color);
+}
+
+/* Modo oscuro para el botón de eliminar */
+body.dark .delete-btn {
+  background-color: #d9534f;
+  color: white;
+}
+
+body.dark .delete-btn:hover {
+  background-color: #c9302c;
+  border: 1px solid #fff;
+}
+
+/* Modal estándar */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: var(--body-color);
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: var(--text-color-ticket);
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+  color: var(--text-color-ticket);
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="date"],
+.modal-content input[type="number"],
+.modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: var(--body-color);
+  color: var(--text-color-ticket);
+}
+
+.modal-content .buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-content button {
+  width: auto;
+  min-width: 100px;
+}
+
+.modal-content button.close {
+  background-color: #6c757d; /* Gris para botón de cancelar */
+  color: white;
+}
+
+.modal-content button.close:hover {
+  background-color: #5a6268;
+}
+
+/* Modal para eliminar */
+.delete-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.delete-modal-content {
+  background-color: var(--body-color);
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.delete-modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--text-color-ticket);
+}
+
+.delete-modal-content p {
+  margin-bottom: 20px;
+  color: var(--text-color-ticket);
+}
+
+.delete-modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: var(--body-color);
+  color: var(--text-color-ticket);
+}
+
+.delete-modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.delete-modal-buttons button {
+  width: auto;
+  min-width: 100px;
+}
+
+.confirm-delete-btn {
+  background-color: #d9534f;
+  color: white;
+}
+
+.confirm-delete-btn:hover {
+  background-color: #c9302c;
+  border: 1px solid var(--text-color);
+}
+
+/* Estilos para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .botones-container {
+    flex-direction: column;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .botones-container button {
+    width: 100%;
+  }
+  
+  .modal-content,
+  .delete-modal-content {
+    width: 95%;
+    padding: 15px;
+  }
+}
+
+/* Ajustes adicionales para modo oscuro */
+body.dark .modal-content,
+body.dark .delete-modal-content {
+  background-color: var(--body-color);
+  border: 1px solid var(--primary-color);
+}
+
+body.dark .modal-content input,
+body.dark .modal-content select,
+body.dark .delete-modal-content select {
+  background-color: #2a2b2c;
+  color: var(--text-color);
+  border: 1px solid var(--primary-color);
+}
+
+body.dark .modal-content input:focus,
+body.dark .modal-content select:focus,
+body.dark .delete-modal-content select:focus {
+  outline: none;
+  border-color: var(--toggle-color);
+}
+
+/* Estilos para botones deshabilitados */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  background-color: var(--primary-color);
+  border: none;
+}
+
+.confirm-delete-btn:disabled:hover {
+  background-color: #d9534f;
+  border: none;
+}
+
+/* Estilos adicionales para las tarjetas de obra mejoradas */
+
+/* Estado de la obra */
+.estado-obra {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.estado-texto {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 12px;
+    background-color: var(--primary-color);
+    color: var(--body-color);
+}
+
+.porcentaje-texto {
+    font-size: 0.75rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* Estados específicos de obras */
+.obra-finalizada .estado-texto {
+    background-color: #28a745;
+    color: white;
+}
+
+.obra-atrasada .estado-texto {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Indicador visual para obras finalizadas */
+.obra-finalizada {
+    position: relative;
+    overflow: visible;
+}
+
+.obra-finalizada::after {
+    content: '✓ FINALIZADA';
+    position: absolute;
+    top: 15px;
+    right: -20px;
+    background-color: #28a745;
+    color: white;
+    padding: 5px 25px;
+    transform: rotate(15deg);
+    font-weight: bold;
+    font-size: 0.7rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 10;
+    border-radius: 3px;
+}
+
+/* Indicador para obras atrasadas */
+.obra-atrasada::after {
+    content: '⚠ ATRASADA';
+    position: absolute;
+    top: 15px;
+    right: -20px;
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 25px;
+    transform: rotate(15deg);
+    font-weight: bold;
+    font-size: 0.7rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 10;
+    border-radius: 3px;
+}
+
+/* Ajustar la descripción para acomodar más información */
+.descripcion .text-et {
+    margin: 3px 0;
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+.descripcion .text-t {
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+}
+
+/* Mejorar la barra de progreso */
+.progreso {
+    width: 90%;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.barra-progreso {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), #28a745);
+    border-radius: 4px;
+    transition: width 0.8s ease;
+}
+
+/* Responsive para las nuevas características */
+@media (max-width: 768px) {
+    .obra-finalizada::after,
+    .obra-atrasada::after {
+        top: 10px;
+        right: -15px;
+        padding: 3px 20px;
+        font-size: 0.6rem;
+        transform: rotate(12deg);
+    }
+    
+    .estado-obra {
+        margin-top: 8px;
+        gap: 3px;
+    }
+    
+    .estado-texto {
+        font-size: 0.7rem;
+        padding: 2px 6px;
+    }
+    
+    .porcentaje-texto {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .descripcion .text-et {
+        font-size: 0.85rem;
+        margin: 2px 0;
+    }
+    
+    .descripcion .text-t {
+        font-size: 1.1rem;
+        margin-bottom: 6px;
+    }
+    
+    .obra-finalizada::after,
+    .obra-atrasada::after {
+        display: none; /* Ocultar en pantallas muy pequeñas */
+    }
+}
+
+/* Modo oscuro para los nuevos elementos */
+body.dark .estado-texto {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+body.dark .obra-finalizada .estado-texto {
+    background-color: #28a745;
+    color: white;
+}
+
+body.dark .obra-atrasada .estado-texto {
+    background-color: #dc3545;
+    color: white;
+}
+
+body.dark .obra-por-finalizar .estado-texto {
+    background-color: #ffc107;
+    color: #000;
+}
+
+body.dark .porcentaje-texto {
+    color: var(--text-color);
+}
+
+body.dark .barra-progreso {
+    background: linear-gradient(90deg, var(--primary-color), #4CAF50);
+}

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructora: Tecno Build</title>
+    <link rel="stylesheet" href="menu.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="../Login/logo.png">
+</head>
+
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="img-text">
+                <span class="imagen">
+                    <img src="../Login/logo.png" alt="logo">
+                </span>
+
+                <div class="text header-text">
+                    <span class="name">TecnoBuild</span>
+                    <span class="desc">Construccion inteligente</span>
+                </div>
+            </div>
+            <i class='bx bx-menu toggle' ></i>
+        </header>
+        
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="obras.html">
+                            <i class='bx bx-home icon' ></i>
+                            <span class="text nav-text">Obras</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="/winHerr/herramienta.html">
+                            <i class='bx bx-wrench icon' ></i>
+                            <span class="text nav-text">Herramienta</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="/winMat/material.html">
+                            <i class='bx bx-box icon' ></i>
+                            <span class="text nav-text">Material</span>
+                        </a>
+                    </li>
+                    <li class="nav-link active">
+                        <a href="/winEmp/empleado.html">
+                            <i class='bx bx-user icon' ></i>
+                            <span class="text nav-text">Empleado</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom-content">
+                <li class="">
+                    <a href="#" id="profileBtn">
+                        <i class='bx bx-user-circle icon' ></i>
+                        <span class="text nav-text">Mi Perfil</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#" onclick="if(confirm('¿Cerrar sesión?')) { localStorage.clear(); window.location.href='/index.html'; }">
+                        <i class='bx bx-log-out icon' ></i>
+                        <span class="text nav-text">Salir</span>
+                    </a>
+                </li>
+                <li class="mode">
+                    <div class="moon-sun">
+                        <i class='bx bx-moon icon moon' ></i>
+                        <i class='bx bx-sun icon sun' ></i>
+                    </div>
+                    <span class="mode-text text">Modo oscuro</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home">
+        <div class="text">Obras</div>
+        <div class="botones-container">
+            <button id="openModal">Agregar obra</button>
+            <button id="deleteObra" class="delete-btn">Eliminar obra</button>
+        </div>
+    </section>
+
+    <!-- Modal para agregar una obra -->
+    <div class="modal" id="formModal">
+        <div class="modal-content">
+            <h2>Agregar Obra</h2>
+            <form>
+                <label for="name">Nombre de la obra:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="fecha-inicio">Fecha de inicio:</label>
+                <input type="date" id="fecha-inicio" name="fecha-inicio" required>
+
+                <label for="ubicacion">Ubicación:</label>
+                <input type="text" id="ubicacion" name="ubicacion" required>
+
+                <label for="dueno-predio">Dueño del predio:</label>
+                <input type="text" id="dueno-predio" name="dueno-predio" required>
+
+                <label for="partida-presupuestal">Presupuesto:</label>
+                <input type="text" id="partida-presupuestal" name="partida-presupuestal" required>
+
+                <label for="fecha-fin">Fecha de finalización:</label>
+                <input type="date" id="fecha-fin" name="fecha-fin" required>
+
+                <label for="numero-contrato">Número de contrato:</label>
+                <input type="text" id="numero-contrato" name="numero-contrato" required>
+
+                <div class="buttons">
+                    <button type="button" class="close" id="closeModal">Cancelar</button>
+                    <button type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para eliminar obra -->
+    <div class="delete-modal" id="deleteModal">
+        <div class="delete-modal-content">
+            <h2>Eliminar Obra</h2>
+            <p>Selecciona la obra que deseas eliminar:</p>
+            <select id="obraSelect">
+                <!-- Las opciones se cargarán dinámicamente -->
+            </select>
+            <div class="delete-modal-buttons">
+                <button type="button" class="close" id="cancelDelete">Cancelar</button>
+                <button type="button" class="confirm-delete-btn" id="confirmDelete">Eliminar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de Perfil de Usuario -->
+<div class="modal" id="profileModal" style="display: none;">
+    <div class="modal-content" style="max-width: 450px;">
+        <h2 style="color: var(--text-color-ticket); margin-bottom: 20px; text-align: center;">
+            <i class='bx bx-user-circle' style="font-size: 2em; color: var(--primary-color); display: block; margin-bottom: 10px;"></i>
+            Perfil de Usuario
+        </h2>
+        
+        <div class="profile-info" style="margin-bottom: 25px;">
+            <div class="info-item" style="display: flex; align-items: center; padding: 12px; margin-bottom: 10px; background: var(--primary-color-light); border-radius: 8px;">
+                <i class='bx bx-user' style="font-size: 20px; color: var(--primary-color); margin-right: 15px; width: 25px;"></i>
+                <div>
+                    <strong style="color: var(--text-color-dark); font-size: 14px;">Usuario:</strong>
+                    <p id="profileUsername" style="color: var(--text-color); margin: 2px 0 0 0; font-size: 13px;"></p>
+                </div>
+            </div>
+            
+            <div class="info-item" style="display: flex; align-items: center; padding: 12px; margin-bottom: 10px; background: var(--primary-color-light); border-radius: 8px;">
+                <i class='bx bx-time' style="font-size: 20px; color: var(--primary-color); margin-right: 15px; width: 25px;"></i>
+                <div>
+                    <strong style="color: var(--text-color-dark); font-size: 14px;">Última conexión:</strong>
+                    <p id="profileLoginTime" style="color: var(--text-color); margin: 2px 0 0 0; font-size: 13px;"></p>
+                </div>
+            </div>
+            
+            <div class="info-item" style="display: flex; align-items: center; padding: 12px; margin-bottom: 10px; background: var(--primary-color-light); border-radius: 8px;">
+                <i class='bx bx-shield-check' style="font-size: 20px; color: var(--primary-color); margin-right: 15px; width: 25px;"></i>
+                <div>
+                    <strong style="color: var(--text-color-dark); font-size: 14px;">Estado de sesión:</strong>
+                    <p style="color: #28a745; margin: 2px 0 0 0; font-size: 13px;">✓ Activa</p>
+                </div>
+            </div>
+            
+            <div class="info-item" style="display: flex; align-items: center; padding: 12px; background: var(--primary-color-light); border-radius: 8px;">
+                <i class='bx bx-timer' style="font-size: 20px; color: var(--primary-color); margin-right: 15px; width: 25px;"></i>
+                <div>
+                    <strong style="color: var(--text-color-dark); font-size: 14px;">Tiempo restante:</strong>
+                    <p id="profileSessionTime" style="color: var(--text-color); margin: 2px 0 0 0; font-size: 13px;"></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-actions" style="margin-bottom: 20px;">
+            <button type="button" id="changePasswordBtn" style="width: 100%; padding: 12px; background-color: var(--primary-color); color: var(--white); border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--tran-02); margin-bottom: 10px;">
+                <i class='bx bx-key' style="margin-right: 8px;"></i>
+                Cambiar Contraseña
+            </button>
+        </div>
+        
+        <div class="buttons">
+            <button type="button" class="close" id="closeProfile" style="width: 100%;">
+                Cerrar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Cambiar Contraseña -->
+<div class="modal" id="changePasswordModal" style="display: none;">
+    <div class="modal-content" style="max-width: 400px;">
+        <h2 style="color: var(--text-color-ticket); margin-bottom: 20px; text-align: center;">
+            <i class='bx bx-key' style="font-size: 2em; color: var(--primary-color); display: block; margin-bottom: 10px;"></i>
+            Cambiar Contraseña
+        </h2>
+        
+        <form id="changePasswordForm">
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; color: var(--text-color-ticket); font-weight: 500; font-size: 14px;">Contraseña actual:</label>
+                <input type="password" id="currentPassword" placeholder="Ingrese su contraseña actual" required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; background-color: var(--body-color); color: var(--text-color-ticket);">
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; color: var(--text-color-ticket); font-weight: 500; font-size: 14px;">Nueva contraseña:</label>
+                <input type="password" id="newPassword" placeholder="Ingrese su nueva contraseña" required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; background-color: var(--body-color); color: var(--text-color-ticket);">
+            </div>
+            
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; margin-bottom: 8px; color: var(--text-color-ticket); font-weight: 500; font-size: 14px;">Confirmar nueva contraseña:</label>
+                <input type="password" id="confirmPassword" placeholder="Confirme su nueva contraseña" required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; background-color: var(--body-color); color: var(--text-color-ticket);">
+            </div>
+            
+            <div class="buttons" style="display: flex; gap: 10px;">
+                <button type="button" class="close" id="cancelChangePassword" style="flex: 1;">
+                    Cancelar
+                </button>
+                <button type="submit" style="flex: 1; background-color: var(--primary-color); color: var(--white);">
+                    <i class='bx bx-check'></i> Cambiar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <script src="obras.js"></script>
+    <script src="/verificacionU.js"></script>
+</body>
+</html>

@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecno Build: Material</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="/Login/icon.png">
+    <style>
+    *{
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    @media (max-width: 992px) {
+        html {
+            font-size: 15px;
+        }
+        
+        .tabla-container {
+            left: 108px !important;
+            width: calc(100% - 108px) !important;
+        }
+        
+        .tabla-header {
+            width: 97%;
+        }
+        
+        .tabla-wrapper {
+            width: 97%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        html {
+            font-size: 14px;
+        }
+
+        section {
+            padding: 15px;
+        }
+        
+        .tabla-container {
+            left: 88px !important;
+            width: calc(100% - 88px) !important;
+            padding: 10px 0;
+        }
+        
+        .tabla-header {
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        
+        .tabla-actions {
+            width: 100%;
+            justify-content: space-between;
+        }
+        
+        .tabla-wrapper {
+            width: 99%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        html {
+            font-size: 12px;
+        }
+
+        section {
+            padding: 8px;
+        }
+        
+        .sidebar.close {
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .sidebar.close ~ .home, 
+        .sidebar.close ~ .home1,
+        .sidebar.close ~ .tabla-container {
+            left: 0 !important;
+            width: 100% !important;
+        }
+        
+        .tabla-container {
+            left: 75px !important;
+            width: calc(100% - 75px) !important;
+        }
+    }
+
+    :root{
+        --body-color: #fff; 
+        --sidebar-color: #D6CBBE; 
+        --primary-color: #D4A373; 
+        --primary-color-light: #EADBC8; 
+        --toggle-color: #A3B9CC;
+        --text-color: #6E6A59;
+                --text-color-ticket: #000000;
+        --text-color-ticket-mouse: #f0f0f0;
+        --table-header: #EADBC8;
+        --table-row-odd: #f9f5f1;
+        --table-row-even: #ffffff;
+        --table-border: #D4A373;
+        
+        --tran-02: all 0.2s ease;
+        --tran-03: all 0.3s ease;
+        --tran-04: all 0.4s ease;
+        --tran-05: all 0.5s ease;
+    }
+    
+    body{
+        height: 100vh;
+        background: var(--body-color);
+        transition: var(--tran-02);
+    }
+    
+    body.dark{
+        --body-color: #1e2731;
+        --sidebar-color:#161b22;
+        --primary-color:#3a3b3c;
+        --primary-color-light: #3a3b3c;
+        --toggle-color:#fff;
+        --text-color:#ccc;
+        --text-color-ticket: #ffffff;
+        --text-color-ticket-mouse: #464040;
+        --table-header: #2a2a2a;
+        --table-row-odd: #1e2731;
+        --table-row-even: #242d36;
+        --table-border: #3a3b3c;
+    }
+    
+    .sidebar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 250px;
+        padding: 10px 14px;
+        background: var(--sidebar-color);
+        transition: var(--tran-05);
+        z-index: 100;
+        border-radius: 0 10px 10px 0;
+    }
+    
+    .sidebar.close{
+        width: 88px;
+    }
+    
+    .sidebar .text{
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--text-color);
+        transition: var(--tran-05);
+        white-space: nowrap;
+        opacity: 1;
+    }
+    
+    .sidebar.close .text{
+        opacity: 0;
+    }
+    
+    .sidebar .imagen{
+        min-width: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .sidebar li{
+        height: 50px;
+        margin-top: 10px;
+        list-style: none;
+        display: flex;
+        align-items: center;
+    }
+    
+    .sidebar li .icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 60px;
+        font-size: 20px;
+    }
+    
+    .sidebar li .icon,
+    .sidebar li .text{
+        color: var(--text-color);
+        transition: var(--tran-02);
+    }
+    
+    .sidebar header {
+        position: relative;
+    }
+    
+    .sidebar .img-text img{
+        width: 40px;
+        border-radius: 6px;
+    }
+    
+    .sidebar header .img-text{
+        display: flex;
+        align-items: center;
+    }
+    
+    .sidebar .img-text .header-text{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .header-text .name{
+        font-weight: 600;
+    }
+    
+    .header-text .desc{
+        margin-top: -2px;
+    }
+    
+    .sidebar header .toggle{
+        position: absolute;
+        top: 50%;
+        right: -25px;
+        transform: translateY(-50%);
+        height: 25px;
+        width: 25px;
+        background: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: var(--sidebar-color);
+        font-size: 20px;
+        cursor: pointer;
+    }
+    
+    .slider.close header .toggle{
+        transform: translateY(-50%) rotate(180deg);
+    }
+    
+    body.dark .slider header .toggle{
+        transform: rotate(180deg);
+        color: var(--text-color);
+    }
+    
+    .sidebar .menu{
+        margin-top: 30px;
+    }
+    
+    .sidebar li a {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: var(--tran-04);
+    }
+    
+    .sidebar li a:hover{
+        background: var(--primary-color);
+    }
+    
+    .sidebar li:hover a .icon,
+    .sidebar li:hover a .text{
+        color: var(--sidebar-color);
+    }
+    
+    body.dark .sidebar li:hover a .icon,
+    body.dark .sidebar li:hover a .text{
+        color: var(--text-color);
+    }
+    
+    .sidebar .menu-bar{
+        height: calc(100% - 50px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .menu-bar .mode{
+        position: relative;
+        border-radius: 10px;
+        background: var(--primary-color-light);
+    }
+    
+    .menu-bar .mode .moon-sun{
+        height: 50px;
+        width: 60px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .menu-bar .mode i{
+        position: absolute;
+        transition: var(--tran-03);
+    }
+    
+    body.dark .menu-bar .mode i.sun {
+        opacity: 1;
+    }
+    
+    body.dark .menu-bar .mode i.moon {
+        opacity: 1;
+    }
+    
+    .menu-bar .mode i.sun{
+        opacity: 0;
+    }
+    
+    .menu-bar .mode .toggle-switch{
+        border-radius: 10px;
+        position: absolute;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        min-width: 60px;
+        cursor: pointer;
+        background: var(--primary-color-light);
+    }
+    
+    .toggle-switch .switch{
+        border-radius: 25px;
+        position: relative;
+        height: 22px;
+        width: 44px;
+        background: var(--toggle-color);
+    }
+    
+    .switch::before{
+        content: '';
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        background: var(--sidebar-color);
+        transition: var(--tran-03);
+    }
+    
+    body.dark .switch::before{
+        left: 24px;
+    }
+    
+    .home1{
+        position: relative;
+        height: 20px;
+        left: 270px;
+        width: calc(100% - 270px);
+        background: var(--body-color);
+        transition: var(--tran-05);
+    }
+
+    .sidebar.close ~ .home1{
+        left: 108px;
+        width: calc(100% - 108px);
+    }
+    
+    .home{
+        position: relative;
+        height: 40px;
+        left: 270px;
+        width: calc(100% - 270px);
+        transition: var(--tran-05);
+    }
+
+    .home .text{
+        font-size: 30px;
+        font-weight: 500;
+        padding: 8px 10px;
+        color: var(--text-color);
+    }
+    
+    .sidebar.close ~ .home{
+        left: 108px;
+        width: calc(100% - 108px);
+    }
+    
+    .home {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 20px 30px 20px;
+        transition: var(--tran-05);
+        background: var(--body-color);
+    }
+    .home .search-form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .home input[type="text"] {
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid #3c4145;
+        width: 600px;
+    }
+    
+    .home .search-form .search-input {
+        width: 600px;
+        background: red;
+    }
+    
+    .home button {
+        padding: 5px 10px;
+        border: none;
+        background-color: var(--sidebar-color);
+        color: var(--text-color);
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .home button:hover {
+        background-color: var(--primary-color);
+    }
+    
+    .home .info {
+        font-size: 14px;
+    }
+
+    /* TABLAS MEJORADAS */
+    .tabla-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        left: 270px;
+        width: calc(100% - 270px);
+        background: var(--body-color);
+        transition: var(--tran-05);
+        padding: 20px 0;
+        overflow-x: auto;
+    }
+
+    .sidebar.close ~ .tabla-container {
+        left: 108px;
+        width: calc(100% - 108px);
+    }
+
+    .tabla-header {
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 0 10px;
+    }
+
+    .tabla-title {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: var(--text-color);
+    }
+
+    .tabla-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .tabla-actions button {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--primary-color);
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: var(--tran-03);
+    }
+
+    .tabla-actions button:hover {
+        background-color: var(--text-color);
+    }
+
+    .tabla-actions button.remove {
+        background-color: #d37373;
+    }
+
+    .tabla-actions button.remove:hover {
+        background-color: #a95555;
+    }
+
+    /* Tabla responsiva */
+    .tabla-container .tabla-wrapper {
+        width: 95%;
+        overflow-x: auto;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 800px; /* Asegurar que la tabla no se comprima demasiado */
+    }
+
+    th {
+        background-color: var(--table-header);
+        color: var(--text-color);
+        font-weight: bold;
+        text-align: center;
+        padding: 12px 15px;
+        border: 1px solid var(--table-border);
+        position: sticky;
+        top: 0;
+    }
+
+    td {
+        padding: 10px 15px;
+        text-align: center;
+        border: 1px solid var(--table-border);
+        color: var(--text-color-ticket);
+    }
+
+    tr:nth-child(odd) {
+        background-color: var(--table-row-odd);
+    }
+
+    tr:nth-child(even) {
+        background-color: var(--table-row-even);
+    }
+
+    tr:hover {
+        background-color: var(--primary-color-light);
+    }
+    
+    @media (max-width: 992px) {
+        .tabla-container {
+            padding: 10px 0;
+        }
+        
+        .tabla-title {
+            font-size: 1.2em;
+        }
+        
+        .tabla-actions button {
+            padding: 6px 12px;
+            font-size: 0.9em;
+        }
+    }
+
+    /* FORMULARIOS MEJORADOS */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        overflow-y: auto;
+    }
+    
+    .modal-content {
+        background-color: var(--body-color);
+        padding: 20px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 500px;
+        margin: 0 auto;
+        max-height: calc(100vh - 100px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: auto;
+    }
+    
+    /* Estilos para el modal de eliminación */
+    .delete-modal {
+        background-color: #1E2731;
+        color: white;
+        max-width: 400px;
+        border-radius: 8px;
+        padding: 25px;
+    }
+    
+    .delete-modal h2 {
+        color: white;
+        text-align: center;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+    
+    .delete-modal p {
+        text-align: center;
+        margin-bottom: 15px;
+        color: #ccc;
+    }
+    
+    .delete-buttons {
+        display: flex;
+        justify-content: space-between !important;
+        margin-top: 25px !important;
+    }
+    
+    .modal-content h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--text-color-ticket);
+        font-family: 'Times New Roman', Times, serif;
+    }
+    
+    .modal-content label {
+        display: block;
+        margin: 10px 0 5px;
+        color: var(--text-color-ticket);
+        font-weight: bold;
+    }
+    
+    .modal-content input[type="text"],
+    .modal-content input[type="date"],
+    .modal-content input[type="number"],
+    .modal-content select,
+    .modal-content textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid var(--table-border);
+        border-radius: 5px;
+        background-color: var(--table-row-odd);
+        color: var(--text-color-ticket);
+    }
+    
+    .modal-content textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+    
+    .modal-content .buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .modal-content button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: var(--tran-03);
+        min-width: 100px;
+    }
+    
+    .modal-content button[type="submit"] {
+        background-color: var(--primary-color);
+        color: white;
+    }
+    
+    .modal-content button[type="submit"]:hover {
+        background-color: var(--text-color);
+    }
+    
+    .modal-content button.close {
+        background-color: #d4d4d4;
+        color: #333;
+    }
+    
+    .modal-content button.close:hover {
+        background-color: #bdbdbd;
+    }
+
+    /* Botones para el modal de eliminar */
+    .cancel-btn {
+        background-color: #3A3B3C !important;
+        color: white !important;
+        border-radius: 5px !important;
+    }
+    
+    .cancel-btn:hover {
+        background-color: #4A4B4C !important;
+    }
+    
+    .delete-btn {
+        background-color: #B85C5C !important;
+        color: white !important;
+        border-radius: 5px !important;
+    }
+    
+    .delete-btn:hover {
+        background-color: #A94949 !important;
+    }
+
+    fieldset {
+        border: 1px solid var(--table-border);
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    legend {
+        padding: 0 10px;
+        color: var(--text-color-ticket);
+        font-weight: bold;
+    }
+
+    /* Estilos para los modales de eliminación */
+    .select-delete {
+        width: 100%;
+        padding: 10px;
+        margin: 20px 0;
+        border: 1px solid var(--table-border);
+        border-radius: 5px;
+        background-color: var(--table-row-odd);
+        color: var(--text-color-ticket);
+    }
+
+    /* Estilos para las opciones del select */
+    select option {
+        padding: 8px;
+    }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="img-text">
+                <span class="imagen">
+                    <img src="/Login/logo.png" alt="logo">
+                </span>
+
+                <div class="text header-text">
+                    <span class="name">TecnoBuild</span>
+                    <span class="desc">Construccion inteligente</span>
+                </div>
+            </div>
+            <i class='bx bx-menu toggle'></i>
+        </header>
+        
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="/Principal/obras.html">
+                            <i class='bx bx-home icon'></i>
+                            <span class="text nav-text">Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="/winHerr/herramienta.html">
+                            <i class='bx bx-wrench icon'></i>
+                            <span class="text nav-text">Herramienta</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="material.html">
+                            <i class='bx bx-box icon'></i>
+                            <span class="text nav-text">Material</span>
+                        </a>
+                    </li>
+                        <li class="nav-link">
+                        <a href="/winEmp/empleado.html">
+                            <i class='bx bx-user icon' ></i>
+                            <span class="text nav-text">Empleado</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom-content">
+                <li class="">
+                    <a href="#" id="profileBtn">
+                        <i class='bx bx-user-circle icon' ></i>
+                        <span class="text nav-text">Mi Perfil</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="index.html">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Salir</span>
+                    </a>
+                </li>
+
+                <li class="mode">
+                    <div class="moon-sun">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Modo oscuro</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home1"></section>
+    <section class="home">
+        <form action="search.html" method="get" class="search-form">
+            <input type="text" name="query" placeholder="Buscar...">
+            <button type="submit"><i class='bx bx-search'></i></button>
+        </form>
+    </section>
+
+    <!-- TABLA DE MATERIALES -->
+    <section class="tabla-container">
+        <div class="tabla-header">
+            <h2 class="tabla-title">Catálogo de Materiales</h2>
+            <div class="tabla-actions">
+                <button id="openModalMaterial" class="add"><i class='bx bx-plus'></i> Agregar</button>
+                <button id="openDeleteModalMaterial" class="remove"><i class='bx bx-trash'></i> Eliminar</button>
+            </div>
+        </div>
+        <div class="tabla-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Medida</th>
+                        <th>Precio Inicial</th>
+                        <th>Precio Final</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody id="material-tbody">
+                    <!-- La tabla se llenará dinámicamente con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- MODAL PARA AGREGAR MATERIAL -->
+    <div class="modal" id="formModalMaterial">
+        <div class="modal-content">
+            <h2>Agregar Nuevo Material</h2>
+            <form id="form-add-material">
+                <fieldset>
+                    <legend>Información del material:</legend>
+                    <label for="nombre-material">Nombre:</label>
+                    <input type="text" id="nombre-material" name="nombre-material" placeholder="Ej: Cemento, Arena, Varilla..." required>
+
+                    <label for="categoria-material">Categoría:</label>
+                    <select id="categoria-material" name="categoria-material" required>
+                        <option value="">Seleccione una categoría</option>
+                        <option value="cemento">Cemento y concreto</option>
+                        <option value="agregados">Agregados (arena, grava)</option>
+                        <option value="acero">Acero y metal</option>
+                        <option value="madera">Madera</option>
+                        <option value="acabados">Acabados</option>
+                        <option value="electrico">Material eléctrico</option>
+                        <option value="plomeria">Material de plomería</option>
+                        <option value="pintura">Pinturas y recubrimientos</option>
+                        <option value="aislantes">Aislantes e impermeabilizantes</option>
+                        <option value="otro">Otro</option>
+                    </select>
+
+                    <label for="medida-material">Medida/Unidad:</label>
+                    <input type="text" id="medida-material" name="medida-material" placeholder="Ej: Kg, m³, bulto, pieza..." required>
+
+                    <label for="precio-inicial-material">Precio Inicial ($):</label>
+                    <input type="number" id="precio-inicial-material" name="precio-inicial-material" min="0" step="0.01" required>
+
+                    <label for="precio-final-material">Precio Final ($):</label>
+                    <input type="number" id="precio-final-material" name="precio-final-material" min="0" step="0.01" required>
+
+                    <label for="fecha-material">Fecha:</label>
+                    <input type="date" id="fecha-material" name="fecha-material" required>
+                </fieldset>
+                
+                <div class="buttons">
+                    <button type="button" class="close" id="closeModalMaterial">Cancelar</button>
+                    <button type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- MODAL PARA ELIMINAR MATERIAL -->
+    <div class="modal" id="deleteModalMaterial">
+        <div class="modal-content">
+            <h2>Eliminar Material</h2>
+            <p>Selecciona el material que deseas eliminar:</p>
+            
+            <select id="select-material-delete" class="select-delete">
+                <option value="">No hay materiales disponibles</option>
+            </select>
+            
+            <div class="buttons">
+                <button type="button" class="close" id="cancelDeleteMaterial">Cancelar</button>
+                <button type="button" class="delete-btn" id="confirmDeleteMaterial">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Modal para material
+    const openModalMaterial = document.getElementById("openModalMaterial");
+    const closeModalMaterial = document.getElementById("closeModalMaterial");
+    const modalMaterial = document.getElementById("formModalMaterial");
+
+    if (openModalMaterial && closeModalMaterial && modalMaterial) {
+        openModalMaterial.addEventListener("click", () => {
+            modalMaterial.style.display = "flex";
+        });
+
+        closeModalMaterial.addEventListener("click", () => {
+            modalMaterial.style.display = "none";
+        });
+    }
+
+    // Modal para añadir entrada de material
+    const openModalEntradaMaterial = document.getElementById("openModalEntradaMaterial");
+    const closeModalEntradaMaterial = document.getElementById("closeModalEntradaMaterial");
+    const modalEntradaMaterial = document.getElementById("formModalEntradaMaterial");
+
+    if (openModalEntradaMaterial && closeModalEntradaMaterial && modalEntradaMaterial) {
+        openModalEntradaMaterial.addEventListener("click", () => {
+            // Cargar la lista de materiales en el select
+            loadMaterialOptions();
+            modalEntradaMaterial.style.display = "flex";
+        });
+
+        closeModalEntradaMaterial.addEventListener("click", () => {
+            modalEntradaMaterial.style.display = "none";
+        });
+    }
+
+    // Referencias a las tablas
+    const tbodyMaterial = document.getElementById("material-tbody");
+    const tbodyEntradaMaterial = document.getElementById("entrada-material-tbody");
+
+    // Función para agregar material a la tabla
+    const formMaterial = document.getElementById("form-add-material");
+        if (formMaterial && tbodyMaterial) {
+        formMaterial.addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            // Obtener valores del formulario
+            const nombre = document.getElementById("nombre-material").value;
+            const categoriaSelect = document.getElementById("categoria-material");
+            const categoria = categoriaSelect.options[categoriaSelect.selectedIndex].text;
+            const medida = document.getElementById("medida-material").value;
+            const precioInicial = document.getElementById("precio-inicial-material").value;
+            const precioFinal = document.getElementById("precio-final-material").value;
+            const fecha = document.getElementById("fecha-material").value;
+            
+            // Crear nueva fila
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td>${nombre}</td>
+                <td>${categoria}</td>
+                <td>${medida}</td>
+                <td>${formatPrice(precioInicial)}</td>
+                <td>${formatPrice(precioFinal)}</td>
+                <td>${formatDate(fecha)}</td>
+            `;
+            
+            // Agregar la nueva fila a la tabla
+            tbodyMaterial.appendChild(newRow);
+            
+            // Cerrar el modal y resetear el formulario
+            modalMaterial.style.display = "none";
+            formMaterial.reset();
+        });
+    }
+
+    // Modal para eliminar material
+    const openDeleteModalMaterial = document.getElementById("openDeleteModalMaterial");
+    const deleteModalMaterial = document.getElementById("deleteModalMaterial");
+    const cancelDeleteMaterial = document.getElementById("cancelDeleteMaterial");
+    const confirmDeleteMaterial = document.getElementById("confirmDeleteMaterial");
+    const selectMaterialDelete = document.getElementById("select-material-delete");
+
+    if (openDeleteModalMaterial && deleteModalMaterial) {
+        openDeleteModalMaterial.addEventListener("click", () => {
+            loadMaterialDeleteOptions();
+            deleteModalMaterial.style.display = "flex";
+        });
+    }
+
+    if (cancelDeleteMaterial) {
+        cancelDeleteMaterial.addEventListener("click", () => {
+            deleteModalMaterial.style.display = "none";
+        });
+    }
+
+    // Función para eliminar material seleccionado
+    if (confirmDeleteMaterial && tbodyMaterial) {
+        confirmDeleteMaterial.addEventListener("click", () => {
+            const selectedIndex = selectMaterialDelete.selectedIndex;
+            if (selectedIndex > 0) {
+                const rowIndex = parseInt(selectMaterialDelete.value);
+                const rows = tbodyMaterial.querySelectorAll("tr");
+                if (rowIndex >= 0 && rowIndex < rows.length) {
+                    tbodyMaterial.removeChild(rows[rowIndex]);
+                    deleteModalMaterial.style.display = "none";
+                    alert("Material eliminado correctamente");
+                    loadMaterialDeleteOptions();
+                }
+            } else {
+                alert("Por favor selecciona un material para eliminar");
+            }
+        });
+    }
+
+    // Cerrar modales al hacer clic fuera de ellos
+    window.addEventListener("click", (event) => {
+        if (modalMaterial && event.target === modalMaterial) {
+            modalMaterial.style.display = "none";
+        }
+        if (deleteModalMaterial && event.target === deleteModalMaterial) {
+            deleteModalMaterial.style.display = "none";
+        }
+    });
+
+    // Función para cargar las opciones del select de materiales
+    function loadMaterialDeleteOptions() {
+        if (!selectMaterialDelete || !tbodyMaterial) return;
+        
+        selectMaterialDelete.innerHTML = '<option value="">Seleccione un material para eliminar</option>';
+        
+        const rows = tbodyMaterial.querySelectorAll("tr");
+        if (rows.length === 0) {
+            selectMaterialDelete.innerHTML = '<option value="">No hay materiales disponibles</option>';
+            return;
+        }
+        
+        rows.forEach((row, index) => {
+            const nombre = row.cells[0].textContent;
+            const categoria = row.cells[1].textContent;
+            const option = document.createElement("option");
+            option.value = index;
+            option.textContent = `${nombre} (${categoria})`;
+            selectMaterialDelete.appendChild(option);
+        });
+    }
+
+    // Función para registrar entrada de material
+    const formEntradaMaterial = document.getElementById("form-add-entrada-material");
+    if (formEntradaMaterial && tbodyEntradaMaterial) {
+        formEntradaMaterial.addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            // Obtener valores del formulario
+            const materialSelect = document.getElementById("material-entrada");
+            const material = materialSelect.options[materialSelect.selectedIndex].text;
+            const cantidad = document.getElementById("cantidad-entrada").value;
+            const fecha = document.getElementById("fecha-entrada").value;
+            const semanaObra = document.getElementById("semana-obra").value;
+            const responsableEntrega = document.getElementById("responsable-entrega").value;
+            const responsableRecibe = document.getElementById("responsable-recibe").value;
+            const precioTotal = document.getElementById("precio-total").value;
+            const facturaRemision = document.getElementById("factura-remision").value;
+            
+            // Crear nueva fila
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td>${material}</td>
+                <td>${cantidad}</td>
+                <td>${formatDate(fecha)}</td>
+                <td>${semanaObra}</td>
+                <td>${responsableEntrega}</td>
+                <td>${responsableRecibe}</td>
+                <td>${formatPrice(precioTotal)}</td>
+                <td>${facturaRemision}</td>
+            `;
+            
+            // Agregar la nueva fila a la tabla
+            tbodyEntradaMaterial.appendChild(newRow);
+            
+            // Actualizar la cantidad en almacén del material seleccionado
+            updateMaterialStock(materialSelect.value, cantidad);
+            
+            // Cerrar el modal y resetear el formulario
+            modalEntradaMaterial.style.display = "none";
+            formEntradaMaterial.reset();
+        });
+    }
+
+    // Función para actualizar el stock de un material después de registrar una entrada
+    function updateMaterialStock(materialIndex, cantidad) {
+        if (!tbodyMaterial) return;
+        
+        const rows = tbodyMaterial.querySelectorAll("tr");
+        if (materialIndex >= 0 && materialIndex < rows.length) {
+            const row = rows[materialIndex];
+            const currentStock = parseFloat(row.cells[3].textContent);
+            const newStock = currentStock + parseFloat(cantidad);
+            row.cells[3].textContent = newStock.toString();
+            
+            // Actualizar estado si es necesario
+            if (newStock > 10) {
+                row.cells[6].textContent = "Disponible";
+            } else if (newStock > 0) {
+                row.cells[6].textContent = "Stock bajo";
+            } else {
+                row.cells[6].textContent = "Agotado";
+            }
+        }
+    }
+
+    // Función para cargar las opciones del select de materiales (para el formulario de entrada)
+    function loadMaterialOptions() {
+        const materialSelect = document.getElementById("material-entrada");
+        if (!materialSelect || !tbodyMaterial) return;
+        
+        // Limpiar opciones actuales
+        materialSelect.innerHTML = '<option value="">Seleccione un material</option>';
+        
+        const rows = tbodyMaterial.querySelectorAll("tr");
+        if (rows.length === 0) return;
+        
+        // Agregar cada material como una opción
+        rows.forEach((row, index) => {
+            const nombre = row.cells[0].textContent;
+            const medida = row.cells[2].textContent;
+            const option = document.createElement("option");
+            option.value = index;
+            option.textContent = `${nombre} (${medida})`;
+            materialSelect.appendChild(option);
+        });
+    }
+
+    // Función para cargar las opciones del select de eliminación de entradas de material
+    function loadEntradaMaterialDeleteOptions() {
+        if (!selectEntradaMaterialDelete || !tbodyEntradaMaterial) return;
+        
+        // Limpiar opciones actuales
+        selectEntradaMaterialDelete.innerHTML = '<option value="">Seleccione una entrada para eliminar</option>';
+        
+        const rows = tbodyEntradaMaterial.querySelectorAll("tr");
+        if (rows.length === 0) {
+            selectEntradaMaterialDelete.innerHTML = '<option value="">No hay entradas disponibles</option>';
+            return;
+        }
+        
+        // Agregar cada entrada como una opción
+        rows.forEach((row, index) => {
+            const material = row.cells[0].textContent;
+            const fecha = row.cells[2].textContent;
+            const cantidad = row.cells[1].textContent;
+            const option = document.createElement("option");
+            option.value = index;
+            option.textContent = `${material} - ${cantidad} - ${fecha}`;
+            selectEntradaMaterialDelete.appendChild(option);
+        });
+    }
+
+    // Función para formatear precio con comas
+    function formatPrice(price) {
+        return parseFloat(price).toLocaleString('es-MX', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    }
+
+    // Función para formatear fecha
+    function formatDate(dateString) {
+        if (!dateString) return 'N/A';
+        const date = new Date(dateString);
+        return `${padZero(date.getDate())}/${padZero(date.getMonth() + 1)}/${date.getFullYear()}`;
+    }
+
+    function padZero(num) {
+        return num.toString().padStart(2, '0');
+    }
+
+    // Toggle para el modo oscuro
+    const body = document.querySelector('body');
+    const modeSwitch = document.querySelector('.toggle-switch');
+    const modeText = document.querySelector('.mode-text');
+
+
+
+    // Toggle para el sidebar
+    const toggle = document.querySelector('.toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    
+        // Toggle sidebar
+    if (toggle) {
+        toggle.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+            
+            // Cerrar todos los submenús cuando se cierra/abre el sidebar
+            document.querySelectorAll('.nav-link.open').forEach(item => {
+                item.classList.remove('open');
+            });
+        });
+    }
+
+        // Tema oscuro y claro
+    if (modeSwitch) {
+        modeSwitch.addEventListener("click", () => {
+            body.classList.toggle("dark");
+            
+            if (body.classList.contains("dark")) {
+                modeText.innerText = "Modo claro";
+                // Guardar el modo oscuro en localStorage
+                localStorage.setItem("theme", "dark");
+            } else {
+                modeText.innerText = "Modo oscuro";
+                // Guardar el modo claro en localStorage
+                localStorage.setItem("theme", "light");
+            }
+        });
+    }
+    
+   // Cargar tema guardado
+    const savedTheme = localStorage.getItem("theme");
+    
+    if (savedTheme === "dark") {
+        body.classList.add("dark");
+        if (modeText) modeText.innerText = "Modo claro";
+    } else {
+        body.classList.remove("dark");
+        if (modeText) modeText.innerText = "Modo oscuro";
+    }
+    
+    </script>
+</body>
+</html>

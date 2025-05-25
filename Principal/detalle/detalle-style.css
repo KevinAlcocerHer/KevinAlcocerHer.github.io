@@ -1,0 +1,1540 @@
+*{
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Variables de color - mismas que en tu css original */
+  :root{
+    --body-color: #fff; 
+    --sidebar-color: #D6CBBE; 
+    --primary-color: #D4A373; 
+    --primary-color-light: #EADBC8; 
+    --toggle-color: #A3B9CC;
+    --text-color: #6E6A59;
+    --text-color-ticket: #000000;
+    --text-color-ticket-mouse: #f0f0f0;
+    --border-color: #e0e0e0;
+    --panel-color: #ffffff;
+  
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
+  }
+  
+  body{
+    min-height: 100vh;
+    background: var(--body-color);
+    transition: var(--tran-02);
+    color: var(--text-color-ticket);
+  }
+  
+  /* Tema oscuro */
+  body.dark{
+    --body-color: #1e2731;
+    --sidebar-color: #161b22;
+    --primary-color: #4a4b4c;
+    --primary-color-light: #2a2b2c;
+    --toggle-color: #fff;
+    --text-color: #e0e0e0;
+    --text-color-ticket: #ffffff;
+    --text-color-ticket-mouse: #606060;
+    --border-color: #404040;
+    --panel-color: #2a2b2c;
+  }
+  
+  /* Cabecera con botón de regreso y modo oscuro */
+  .obra-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--primary-color-light);
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-regresar {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--tran-03);
+    width: auto;
+  }
+  
+  .btn-regresar i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .btn-regresar:hover {
+    background-color: var(--text-color-ticket-mouse);
+    border: 1px solid var(--text-color);
+  }
+  
+  /* Contenedor principal */
+  .contenedor {
+    max-width: 1200px;
+    margin: 6rem auto 2rem;
+    padding: 0 1.5rem;
+  }
+  
+  /* Título de la obra */
+  .obra-titulo {
+    font-size: 2rem;
+    color: var(--text-color-ticket);
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-color);
+    text-align: center;
+  }
+  
+  .obra-titulo span {
+    font-weight: 700;
+  }
+  
+  /* Información principal de la obra */
+  .obra-info-principal {
+    display: flex;
+    margin-bottom: 2rem;
+    background-color: var(--body-color);
+    border: 1px solid var(--text-color-ticket);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .imagen-obra {
+    width: 40%;
+    max-width: 400px;
+    overflow: hidden;
+  }
+  
+  .imagen-obra img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .imagen-obra:hover img {
+    transform: scale(1.05);
+  }
+  
+  .datos-principales {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .dato {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .dato i {
+    margin-right: 0.8rem;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+  }
+  
+  .dato p {
+    font-size: 1.1rem;
+    color: var(--text-color-ticket);
+  }
+  
+  .progreso-container {
+    margin-top: 1rem;
+  }
+  
+  .progreso-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  
+  .semana-numero {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color-ticket);
+  }
+  
+  .progreso {
+    width: 100%;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .barra-progreso {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+  
+  /* Sección de Actividades */
+  .actividades-container {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .actividad-tarjeta {
+    background-color: var(--primary-color-light);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: var(--tran-03);
+  }
+  
+  .actividad-tarjeta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .actividad-header h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--text-color-ticket);
+  }
+  
+  .actividad-header p {
+    margin: 0.5rem 0;
+    color: var(--text-color-ticket);
+  }
+  
+  .actividad-tarjeta.doble {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .actividad-izquierda {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .actividad-derecha {
+    flex: 1;
+    min-width: 300px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 1.5rem;
+  }
+  
+  .actividad-lista h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--text-color-ticket);
+  }
+  
+  .actividad-lista ul {
+    list-style: none;
+  }
+  
+  .actividad-lista li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: var(--text-color-ticket);
+  }
+  
+  .actividad-lista li:last-child {
+    border-bottom: none;
+  }
+  
+  /* Toggle de modo oscuro */
+  .toggle-mode {
+    display: flex;
+    align-items: center;
+  }
+  
+  .moon-sun {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .moon-sun i {
+    position: absolute;
+    transition: var(--tran-03);
+    font-size: 1.2rem;
+    color: var(--text-color);
+  }
+  
+  body.dark .moon-sun i.sun {
+    opacity: 1;
+  }
+  
+  body.dark .moon-sun i.moon {
+    opacity: 1;
+  }
+  
+  .moon-sun i.sun {
+    opacity: 0;
+  }
+  
+  .mode-text {
+    margin: 0 0.5rem;
+    color: var(--text-color);
+    font-size: 0.9rem;
+  }
+  
+  .toggle-switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-width: 60px;
+    cursor: pointer;
+  }
+  
+  .toggle-switch .switch {
+    border-radius: 25px;
+    position: relative;
+    height: 22px;
+    width: 44px;
+    background: var(--toggle-color);
+    display: inline-block;
+  }
+  
+  .switch::before {
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background: var(--sidebar-color);
+    transition: var(--tran-03);
+  }
+  
+  body.dark .switch::before {
+    left: 24px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 900px) {
+    .obra-info-principal {
+      flex-direction: column;
+    }
+    
+    .imagen-obra {
+      width: 100%;
+      max-width: none;
+      height: 250px;
+    }
+    
+    .actividad-derecha {
+      border-left: none;
+      padding-left: 0;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .obra-header {
+      padding: 1rem;
+    }
+    
+    .contenedor {
+      margin-top: 5rem;
+      padding: 0 1rem;
+    }
+    
+    .obra-titulo {
+      font-size: 1.5rem;
+    }
+    
+    .dato i {
+      font-size: 1.2rem;
+    }
+    
+    .dato p {
+      font-size: 1rem;
+    }
+    
+    .actividad-tarjeta {
+      padding: 1rem;
+    }
+    
+    .actividad-header h2,
+    .actividad-lista h2 {
+      font-size: 1.2rem;
+    }
+    
+    .btn-regresar {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+    }
+  }
+  .modal-editar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem 0;
+}
+
+.modal-content-editar {
+    background-color: var(--body-color);
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: var(--text-color-ticket);
+}
+
+/* Mejorar inputs en modo oscuro */
+body.dark input, 
+body.dark select {
+    background-color: #2a2b2c;
+    color: #e0e0e0;
+    border: 1px solid #4a4b4c;
+}
+
+body.dark .actividad-tarjeta {
+    background-color: #2a2b2c;
+}
+
+/* Estilos para el formulario de edición */
+.seccion-form {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.seccion-form:last-child {
+    border-bottom: none;
+}
+
+.seccion-form h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color-ticket);
+    font-size: 1.2rem;
+}
+
+.seccion-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color-ticket);
+}
+
+.seccion-form input,
+.seccion-form select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--primary-color-light);
+    border-radius: 4px;
+    background-color: var(--body-color);
+    color: var(--text-color-ticket);
+}
+
+/* Estilos para la lista editable */
+.lista-editable {
+    margin-bottom: 1rem;
+}
+
+.lista-editable-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.lista-editable-item input {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.eliminar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 0, 0, 0.1);
+    border-radius: 50%;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    color: var(--text-color-ticket);
+}
+
+.eliminar-item:hover {
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.agregar-item {
+    display: inline-block;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 0.5rem 0;
+    font-weight: 500;
+}
+
+.agregar-item:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para botones del formulario */
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    gap: 1rem;
+}
+
+.buttons button {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--tran-03);
+}
+
+.buttons button[type="submit"] {
+    background-color: var(--primary-color);
+    color: var(--body-color);
+    border: none;
+}
+
+.buttons button.close {
+    background-color: transparent;
+    color: var(--text-color-ticket);
+    border: 1px solid var(--primary-color);
+}
+
+.buttons button:hover {
+    opacity: 0.9;
+}
+
+/* Añadir estilos para el botón de editar */
+.btn-editar {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--tran-03);
+    width: auto;
+}
+
+.btn-editar i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.btn-editar:hover {
+    background-color: var(--text-color-ticket-mouse);
+    border: 1px solid var(--text-color);
+}
+
+/* Estilos para el botón de agregar actividad */
+.agregar-actividad-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.btn-agregar-actividad {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--tran-03);
+}
+
+.btn-agregar-actividad i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.btn-agregar-actividad:hover {
+    background-color: var(--text-color-ticket-mouse);
+    border: 1px solid var(--text-color);
+}
+
+/* Estilos para el modal de agregar actividad */
+.modal-agregar-actividad {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem 0;
+}
+
+.modal-content-agregar {
+    background-color: var(--body-color);
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: var(--text-color-ticket);
+}
+
+/* Estilos para la selección de tipo de actividad */
+.seleccion-tipo-actividad h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.tipos-actividad {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.tipo-actividad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    border: 2px solid var(--primary-color-light);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--tran-03);
+    width: 150px;
+}
+
+.tipo-actividad i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.tipo-actividad span {
+    font-weight: 500;
+    color: var(--text-color-ticket);
+}
+
+.tipo-actividad:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.tipo-actividad.seleccionado {
+    background-color: var(--primary-color-light);
+    border-color: var(--primary-color);
+}
+
+/* Estilos para formularios de actividad */
+.formulario-actividad h3 {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--primary-color-light);
+}
+
+.formulario-actividad h4 {
+    margin: 1.5rem 0 0.5rem;
+}
+
+.formulario-actividad label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color-ticket);
+}
+
+.formulario-actividad input,
+.formulario-actividad select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--primary-color-light);
+    border-radius: 4px;
+    background-color: var(--body-color);
+    color: var(--text-color-ticket);
+}
+
+/* Ajustes para modo oscuro */
+body.dark .tipo-actividad {
+    border-color: var(--primary-color);
+}
+
+body.dark .tipo-actividad.seleccionado {
+    background-color: var(--primary-color);
+}
+
+body.dark .tipo-actividad:hover {
+    border-color: var(--toggle-color);
+}
+
+/* Estilos para los botones en la cabecera */
+.botones-obra {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-finalizar {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--tran-03);
+    width: auto;
+}
+
+.btn-finalizar i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.btn-finalizar:hover {
+    background-color: #45a049;
+    border: 1px solid var(--text-color);
+}
+
+/* Estilos para la obra finalizada */
+.obra-finalizada {
+    position: relative;
+}
+
+.obra-finalizada::after {
+    content: 'FINALIZADA';
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 30px;
+    transform: rotate(45deg);
+    font-weight: bold;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+/* Deshabilitar botones cuando la obra está finalizada */
+.obra-finalizada-botones {
+    opacity: 0.6;
+    cursor: not-allowed !important;
+    pointer-events: none;
+}
+
+/* ESTILOS PARA LA SECCIÓN DE INFORMACIÓN DEL PROYECTO - CORREGIDOS */
+.proyecto-informacion-container {
+  margin-top: 3rem;
+  background-color: var(--primary-color-light);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.seccion-titulo {
+  font-size: 1.6rem;
+  color: var(--text-color-ticket);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-color);
+  text-align: left;
+}
+
+.informacion-proyecto-cuerpo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.proyecto-resumen, .proyecto-detalles {
+  background-color: var(--body-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.proyecto-resumen h3, .proyecto-detalles h3 {
+  font-size: 1.3rem;
+  color: var(--text-color-ticket);
+  margin-bottom: 1rem;
+}
+
+.proyecto-resumen p {
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.proyecto-resumen span, .detalle-financiero span {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.estado-financiero {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* CORRECCIÓN PRINCIPAL - DETALLE FINANCIERO */
+.detalle-financiero {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.detalle-financiero p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--body-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 8px 0;
+  font-size: 0.95rem;
+  border-left: 3px solid var(--primary-color-light);
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.detalle-financiero p:hover {
+    border-left-color: var(--primary-color);
+    transform: translateX(2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detalle-financiero p span {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1rem;
+    text-align: right;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Asegurar que el indicador de estado esté correctamente posicionado */
+.presupuesto-estado {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    margin-left: 0;
+    flex-shrink: 0;
+}
+
+.presupuesto-estado.saludable {
+    background-color: #2ed573;
+    box-shadow: 0 0 10px rgba(46, 213, 115, 0.5);
+}
+
+.presupuesto-estado.precaucion {
+    background-color: #ffa502;
+    box-shadow: 0 0 10px rgba(255, 165, 2, 0.5);
+}
+
+.presupuesto-estado.peligro {
+    background-color: #ff4757;
+    box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);
+    animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Específicamente para el primer elemento (Presupuesto asignado) */
+.detalle-financiero p:first-child {
+    justify-content: space-between;
+}
+
+.detalle-financiero p:first-child span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.grafico-financiero {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Mejorar la barra de progreso financiero */
+.barra-presupuesto {
+    width: 100%;
+    height: 24px;
+    background-color: var(--body-color);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid var(--border-color);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.barra-gastado {
+    height: 100%;
+    background: linear-gradient(90deg, #2ed573, #26d0ce);
+    transition: all 0.5s ease;
+    border-radius: 10px 0 0 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.barra-gastado::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.1) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.1) 75%);
+    background-size: 20px 20px;
+    animation: barberPole 1s linear infinite;
+}
+
+@keyframes barberPole {
+    0% { background-position: 0 0; }
+    100% { background-position: 20px 0; }
+}
+
+/* Estados de la barra según el porcentaje usado */
+.barra-gastado.warning {
+    background: linear-gradient(90deg, #ffa502, #ff6348) !important;
+}
+
+.barra-gastado.danger {
+    background: linear-gradient(90deg, #ff4757, #c44569) !important;
+}
+
+.barra-gastado.over-budget {
+    background: linear-gradient(90deg, #ff3838, #ff1744) !important;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Texto del porcentaje utilizado */
+.grafico-financiero p {
+    text-align: center;
+    margin: 8px 0 0 0;
+    font-weight: 700;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.proyecto-acciones {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.btn-descargar-pdf {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 1.2rem;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--tran-03);
+}
+
+.btn-descargar-pdf i {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.btn-descargar-pdf:hover {
+  background-color: var(--text-color-ticket-mouse);
+  border: 1px solid var(--text-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Mejorar la presentación de montos */
+.monto-positivo {
+    color: #2ed573 !important;
+    font-weight: 700;
+}
+
+.monto-negativo {
+    color: #ff4757 !important;
+    font-weight: 700;
+}
+
+.monto-advertencia {
+    color: #ffa502 !important;
+    font-weight: 700;
+}
+
+/* Estilos para modo oscuro - INFORMACIÓN FINANCIERA */
+body.dark .detalle-financiero p {
+    background-color: #2a2b2c;
+    border-left-color: var(--primary-color);
+}
+
+body.dark .detalle-financiero p:hover {
+    background-color: #3a3b3c;
+}
+
+body.dark .barra-presupuesto {
+    background-color: #1a1b1c;
+    border-color: #404040;
+}
+
+body.dark .barra-gastado {
+    background: linear-gradient(90deg, #4a8dcc, #5da7db);
+}
+
+body.dark .presupuesto-estado.saludable {
+    background-color: #4a8dcc;
+    box-shadow: 0 0 10px rgba(74, 141, 204, 0.5);
+}
+
+body.dark .proyecto-resumen span, 
+body.dark .detalle-financiero span {
+  color: #6da8e3;
+}
+
+/* Animación de entrada para la información financiera */
+.proyecto-informacion-container {
+    animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+input[type="number"] {
+  background-color: rgba(240, 248, 255, 0.3);
+  border: 1px solid var(--primary-color-light);
+}
+
+/* Estilo cuando el campo está enfocado */
+input[type="number"]:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(212, 163, 115, 0.3);
+}
+
+/* Para modo oscuro */
+body.dark input[type="number"] {
+  background-color: rgba(30, 39, 49, 0.7);
+  color: var(--text-color);
+  border-color: var(--primary-color);
+}
+
+/* Estilos para botones de edición de actividades */
+.actividad-titulo-botones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.btn-editar-actividad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--tran-03);
+    font-size: 1.1rem;
+}
+
+.btn-editar-actividad:hover {
+    background-color: var(--text-color-ticket-mouse);
+    border: 1px solid var(--text-color);
+    transform: scale(1.1);
+}
+
+.btn-editar-actividad i {
+    font-size: 1.1rem;
+}
+
+/* Estilo para actividades deshabilitadas (cuando la obra está finalizada) */
+.actividad-deshabilitada .btn-editar-actividad {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Posicionamiento especial para tarjetas dobles */
+.actividad-tarjeta.doble {
+    position: relative;
+}
+
+/* Botones de edición para tarjetas dobles - posición absoluta en esquina superior derecha */
+.actividad-tarjeta.doble .btn-editar-actividad {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    z-index: 10;
+    width: 35px !important;
+    height: 35px !important;
+    background-color: var(--primary-color) !important;
+    color: var(--text-color) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    transition: var(--tran-03) !important;
+    font-size: 1.1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.actividad-tarjeta.doble .btn-editar-actividad:hover {
+    background-color: var(--text-color-ticket-mouse) !important;
+    border: 1px solid var(--text-color) !important;
+    transform: scale(1.1) !important;
+}
+
+/* Quitar el botón del contenedor de título en tarjetas dobles */
+.actividad-tarjeta.doble .actividad-titulo-botones {
+    justify-content: flex-start !important;
+}
+
+/* Estilos específicos para el formulario de material */
+#nuevoGastoMaterial {
+    background-color: #f8f9fa;
+    border: 2px solid #28a745;
+    font-weight: bold;
+    color: #28a745;
+}
+
+body.dark #nuevoGastoMaterial {
+    background-color: #1a202c;
+    border-color: #48bb78;
+    color: #48bb78;
+}
+
+/* Resaltar campos calculados */
+input[readonly] {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+input[readonly]:focus {
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.25);
+}
+
+/* Indicador visual para campos que afectan el cálculo */
+#nuevoCantidad:focus,
+#nuevoPrecioActual:focus {
+    border-color: #ffc107;
+    box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.25);
+}
+
+/* Texto de ayuda para el gasto calculado */
+.campo-calculado::after {
+    content: " (Calculado automáticamente: Cantidad × Precio)";
+    font-size: 11px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+body.dark .campo-calculado::after {
+    color: #a0aec0;
+}
+
+.seleccion-tipo-actividad .buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.seleccion-tipo-actividad .buttons .close {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.seleccion-tipo-actividad .buttons .close:hover {
+    background-color: #5a6268;
+}
+
+/* Tooltip para información adicional */
+.tooltip {
+    position: relative;
+    cursor: help;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estilos para campos de entrada de gastos */
+input[type="number"].gasto-input {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 600;
+    color: #28a745;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input[type="number"].gasto-input:focus {
+    border-color: #20c997;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.25);
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+}
+
+body.dark input[type="number"].gasto-input {
+    background: linear-gradient(135deg, #2a2b2c, #1a202c);
+    border-color: #48bb78;
+    color: #48bb78;
+}
+
+body.dark input[type="number"].gasto-input:focus {
+    border-color: #68d391;
+    box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.25);
+}
+
+/* Estilos para empleados detallados */
+.empleado-detalle-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--body-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    gap: 1rem;
+    animation: slideInDown 0.3s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.empleado-campos {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo-grupo label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: var(--text-color-ticket);
+}
+
+.campo-grupo input,
+.campo-grupo select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--body-color);
+    color: var(--text-color-ticket);
+    font-size: 0.9rem;
+}
+
+.campo-grupo input:focus,
+.campo-grupo select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(212, 163, 115, 0.2);
+}
+
+.eliminar-empleado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(255, 71, 87, 0.1);
+    color: #ff4757;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.eliminar-empleado:hover {
+    background-color: rgba(255, 71, 87, 0.2);
+    transform: scale(1.1);
+}
+
+/* Modo oscuro para empleados */
+body.dark .empleado-detalle-item {
+    background-color: #2a2b2c;
+    border-color: #404040;
+}
+
+body.dark .campo-grupo input,
+body.dark .campo-grupo select {
+    background-color: #1a1b1c;
+    border-color: #404040;
+    color: #e0e0e0;
+}
+
+/* Estilos para notificaciones de presupuesto */
+.notificacion-presupuesto {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 10000;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    max-width: 350px;
+    animation: slideInRight 0.5s ease;
+}
+
+.notificacion-presupuesto.warning {
+    background: linear-gradient(135deg, #ffa502, #ff6348);
+    color: white;
+}
+
+.notificacion-presupuesto.danger {
+    background: linear-gradient(135deg, #ff4757, #c44569);
+    color: white;
+}
+
+.notificacion-contenido {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notificacion-contenido i {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.cerrar-notificacion {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.cerrar-notificacion:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes slideInRight {
+    from { 
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+}
+
+@keyframes slideOutRight {
+    from { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+    to { 
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+    .detalle-financiero p {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .detalle-financiero p span {
+        text-align: right;
+        margin-left: auto;
+    }
+    
+    .barra-presupuesto {
+        height: 20px;
+    }
+    
+    .estado-financiero {
+        flex-direction: column;
+    }
+    
+    .grafico-financiero {
+        width: 100%;
+    }
+    
+    .proyecto-acciones {
+        justify-content: center;
+    }
+    
+    .empleado-campos {
+        grid-template-columns: 1fr;
+    }
+    
+    .empleado-detalle-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .eliminar-empleado {
+        align-self: flex-end;
+        width: 28px;
+        height: 28px;
+        font-size: 1rem;
+    }
+    
+    .actividad-titulo-botones {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .btn-editar-actividad {
+        align-self: flex-end;
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+}
+
+/* Responsive para tarjetas dobles */
+@media (max-width: 600px) {
+    .actividad-tarjeta.doble .btn-editar-actividad {
+        top: 10px !important;
+        right: 10px !important;
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 1rem !important;
+    }
+}
